@@ -1,525 +1,1029 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-	<head>
-		<meta charset="UTF-8">
-		<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Bernhard Schilling - XMLSolutions</title>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Bernhard Schilling - XMLSolutions</title>
   
-		<!-- Google Fonts: Inter -->
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+        <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
   
-		<!-- Tailwind CSS CDN -->
-		<script src="https://burnhardo.github.io/tailwind.js"></script>
-		<script>
-			tailwind.config = {
-				darkMode: 'class',
-				theme: {
-					extend: {
-						fontFamily: {
-							sans: ['Inter', 'sans-serif'],
-							display: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
-						},
-						colors: {
-							brand: {
-								bg: '#0a0a0a',
-								card: '#121212',
-								cardHover: '#181818',
-								border: '#222222',
-								borderHover: '#333333',
-								muted: '#8e8e93',
-								accent: '#38bdf8',
-							}
-						},
-						keyframes: {
-							marquee: {
-								'0%': { transform: 'translateX(0%)' },
-								'100%': { transform: 'translateX(-50%)' }
-							}
-						},
-						animation: {
-							marquee: 'marquee 25s linear infinite',
-						}
-					}
-				}
-			}
-		</script>
-		<style>
-			/* Custom Scrollbar */
-			::-webkit-scrollbar {
-				width: 7px;
-			}
-			::-webkit-scrollbar-track {
-				background: #0a0a0a;
-			}
-			::-webkit-scrollbar-thumb {
-				background: #262626;
-				border-radius: 9999px;
-			}
-			::-webkit-scrollbar-thumb:hover {
-				background: #3a3a3a;
-			}
-			/* Subtle background grid pattern */
-			.bg-grid {
-				background-size: 36px 36px;
-				background-image: 
-					linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-					linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-			}
+        <style>
+            :root {
+                --bg: #0a0a0a;
+                --card: #121212;
+                --card-hover: #181818;
+                --border: #222222;
+                --border-hover: #383838;
+                --border-subtle: rgba(38, 38, 38, 0.8);
+                --text-main: #e5e5e5;
+                --text-muted: #8e8e93;
+                --text-white: #ffffff;
+                --accent-sky: #38bdf8;
+                --accent-amber: #fbbf24;
+                --accent-purple: #c084fc;
+                --accent-rose: #fb7185;
+                --accent-emerald: #34d399;
+                --accent-blue: #3b82f6;
+                --accent-indigo: #818cf8;
+                --accent-cyan: #22d3ee;
+                --accent-orange: #f97316;
+            }
 
-			/* Pause animation on hover */
-			.marquee-container:hover .marquee-content {
-				animation-play-state: paused;
-			}
-		</style>
-	</head>
-	<body class="bg-[#0a0a0a] text-neutral-200 font-sans antialiased selection:bg-neutral-800 selection:text-white relative bg-grid min-h-screen">
-		<!-- Ambient Glow effect behind Hero -->
-		<div class="pointer-events-none fixed top-0 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-sky-500/10 blur-[130px] rounded-full -z-10"></div>
-		<!-- FLOATING NAVIGATION BAR -->
-		<header class="fixed top-5 inset-x-0 z-50 flex justify-center px-4">
-			<nav class="flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 rounded-full bg-[#121212]/80 backdrop-blur-md border border-[#262626] shadow-xl shadow-black/40 text-sm font-medium">
-				<a href="#home" class="px-3.5 py-1.5 rounded-full text-neutral-300 hover:text-white hover:bg-neutral-800/80 transition-all duration-200 text-xs sm:text-sm">Start</a>
-				<a href="#products" class="px-3.5 py-1.5 rounded-full text-neutral-300 hover:text-white hover:bg-neutral-800/80 transition-all duration-200 text-xs sm:text-sm">Produkte</a>
-				<a href="#contact" class="px-3.5 py-1.5 rounded-full text-neutral-300 hover:text-white hover:bg-neutral-800/80 transition-all duration-200 text-xs sm:text-sm">Kontakt</a>
-				<div class="h-4 w-px bg-neutral-800 mx-1"></div>
-			</nav>
-		</header>
-		<main class="max-w-4xl mx-auto px-5 sm:px-8 pt-32 sm:pt-40 pb-20">
-			<!-- HERO SECTION -->
-			<section id="home" class="flex flex-col items-start space-y-6">
-				<!-- Greeting Badge -->
-				<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-neutral-900/90 border border-neutral-800 text-xs text-neutral-400">
-					<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-					<span>Bernhard Schilling</span>
-				</div>
-				<!-- Main Headline -->
-				<div>
-					<h2 class="text-sm sm:text-base font-medium text-neutral-400 tracking-wide uppercase mb-2"></h2>
-					<h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white font-display leading-[1.08]">
-						XML <br>
-						<span class="text-transparent bg-clip-text bg-gradient-to-r from-neutral-200 via-neutral-400 to-neutral-600">Solutions</span>
-					</h1>
-				</div>
-				<!-- Subtitle -->
-				<p class="text-base sm:text-lg text-neutral-400 max-w-2xl leading-relaxed font-normal">
-					Ideen in interaktive und nahtlose digitale Erlebnisse verwandeln.
-				</p>
-			</section>
+            *, *::before, *::after {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
 
-			<!-- TECH STACK MARQUEE RIBBON -->
-			<section class="mt-16 sm:mt-20 overflow-hidden relative border-y border-neutral-800/80 py-5 marquee-container -mx-5 sm:-mx-8">
-				<!-- Gradient Fade edges -->
-				<div class="pointer-events-none absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10"></div>
-				<div class="pointer-events-none absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10"></div>
-				<!-- Marquee Track (Repeated twice for continuous infinite scroll) -->
-				<div class="flex w-max animate-marquee space-x-6 marquee-content">
-					<!-- Batch 1 -->
-					<div class="flex items-center space-x-6">
-						<span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800/80 text-xs font-medium text-neutral-300">
-							<span class="text-amber-400 font-bold text-xs">JS</span>
-							JavaScript
-						</span>
-						<span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800/80 text-xs font-medium text-neutral-300">
-							<span class="text-yellow-400 font-semibold text-xs">Py</span>
-							Python
-						</span>
-						<span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800/80 text-xs font-medium text-neutral-300">
-							<span class="text-emerald-400 font-bold text-xs">Qt</span>
-							PySide6
-						</span>
-						<!-- C++ mit echtem Hex-Logo -->
-						<span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800/80 text-xs font-medium text-neutral-300">
-							<svg class="w-3.5 h-3.5 text-blue-500 fill-current" viewBox="0 0 24 24">
-								<path d="M12 2L3 7.2v9.6L12 22l9-5.2V7.2L12 2zm-1.8 13.8c-2.1 0-3.6-1.5-3.6-3.8 0-2.3 1.5-3.8 3.6-3.8 1.4 0 2.5.7 3 1.8l-1.3.8c-.4-.7-1-1.1-1.7-1.1-1.2 0-2.1.9-2.1 2.3s.9 2.3 2.1 2.3c.7 0 1.3-.4 1.7-1.1l1.3.8c-.5 1.1-1.6 1.9-3 1.9zm5.3-3.2v-1.1h1.1v-1.1h1.1v1.1h1.1v1.1h-1.1v1.1h-1.1v-1.1h-1.1zm2.8 0v-1.1h1.1v-1.1h1.1v1.1h1.1v1.1h-1.1v1.1h-1.1v-1.1h-1.1z"/>
-							</svg>
-							C++
-						</span>
-						<!-- C# mit offiziellem .NET C#-Hex-Logo -->
-						<span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800/80 text-xs font-medium text-neutral-300">
-							<svg class="w-3.5 h-3.5 text-purple-400 fill-current" viewBox="0 0 24 24">
-								<path d="M12 2L3 7.2v9.6L12 22l9-5.2V7.2L12 2zm-1.5 13.5c-2 0-3.3-1.4-3.3-3.5 0-2.1 1.3-3.5 3.3-3.5 1.3 0 2.3.6 2.8 1.6l-1.2.7c-.3-.6-.9-1-1.6-1-1.1 0-1.9.8-1.9 2.2s.8 2.2 1.9 2.2c.7 0 1.3-.4 1.6-1l1.2.7c-.5 1-1.5 1.6-2.8 1.6zm5.8-2h-.6l.2-1.2h.6v-.7h-.5l.2-1.1h-.7l-.2 1.1h-.9l.2-1.1h-.7l-.2 1.1h-.6v.7h.5l-.2 1.2h-.6v.7h.5l-.2 1.1h.7l.2-1.1h.9l-.2 1.1h.7l.2-1.1h.6v-.7zm-1.5 0h-.9l.2-1.2h.9l-.2 1.2z"/>
-							</svg>
-							C#
-						</span>
-						<span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800/80 text-xs font-medium text-neutral-300">
-							<span class="text-orange-500 font-bold text-xs">🦀</span>
-							Rust
-						</span>
-						<span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800/80 text-xs font-medium text-neutral-300">
-							<svg class="w-3.5 h-3.5 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<ellipse cx="12" cy="5" rx="9" ry="3"/>
-								<path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
-								<path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
-							</svg>
-							SQL
-						</span>
-						<span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800/80 text-xs font-medium text-neutral-300">
-							<span class="text-orange-400 font-bold text-xs">&gt;_</span>
-							Bash & Git
-						</span>
-						<span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800/80 text-xs font-medium text-neutral-300">
-							<svg class="w-3.5 h-3.5 text-indigo-400 fill-current" viewBox="0 0 24 24">
-								<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-4.7 13.3H5.8l.9-4.7c.1-.4.3-.7.6-.9.3-.2.7-.3 1.2-.3h1.4c.8 0 1.4.2 1.8.6.4.4.5 1 .3 1.8-.2 1-.7 1.8-1.4 2.3-.7.5-1.5.8-2.5.8h-.8l-.4 2.1v-1.7zm1.6-4.5h-.6l-.4 2h.6c.5 0 .9-.1 1.2-.4.3-.3.5-.7.6-1.1.1-.3 0-.5-.1-.7-.2-.2-.6-.3-1.1-.3zm4.5 4.5h-1.5l1.6-8.2h1.5l-.6 3.1h1.7c.8 0 1.4.2 1.8.6.4.4.5 1 .3 1.8-.2 1-.7 1.8-1.4 2.3-.7.5-1.5.8-2.5.8h-1.5l-.4 2.1v-2.5zm1.6-4.5h-.6l-.4 2h.6c.5 0 .9-.1 1.2-.4.3-.3.5-.7.6-1.1.1-.3 0-.5-.1-.7-.2-.2-.6-.3-1.1-.3z"/>
-							</svg>
-							PHP
-						</span>
-						<span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800/80 text-xs font-medium text-neutral-300">
-							<svg class="w-3.5 h-3.5 text-orange-500 fill-current" viewBox="0 0 24 24">
-								<path d="M4.14 2h15.72l-1.43 16.03L12 20.21l-6.43-2.18L4.14 2zm13.1 4.54H6.76l.3 3.37h8.86l-.37 4.14-3.55 1-3.55-1-.24-2.67H6.51l.46 4.4 5.03 1.39 5.03-1.39.73-8.24h-.02z"/>
-							</svg>
-							HTML5
-						</span>
-					</div>
-					<!-- Batch 2 (Duplicate for seamless loop) -->
-					<div class="flex items-center space-x-6">
-						<span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800/80 text-xs font-medium text-neutral-300">
-							<span class="text-amber-400 font-bold text-xs">JS</span>
-							JavaScript
-						</span>
-						<span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800/80 text-xs font-medium text-neutral-300">
-							<span class="text-yellow-400 font-semibold text-xs">Py</span>
-							Python
-						</span>
-						<span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800/80 text-xs font-medium text-neutral-300">
-							<span class="text-emerald-400 font-bold text-xs">Qt</span>
-							PySide6
-						</span>
-						<!-- C++ mit echtem Hex-Logo -->
-						<span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800/80 text-xs font-medium text-neutral-300">
-							<svg class="w-3.5 h-3.5 text-blue-500 fill-current" viewBox="0 0 24 24">
-								<path d="M12 2L3 7.2v9.6L12 22l9-5.2V7.2L12 2zm-1.8 13.8c-2.1 0-3.6-1.5-3.6-3.8 0-2.3 1.5-3.8 3.6-3.8 1.4 0 2.5.7 3 1.8l-1.3.8c-.4-.7-1-1.1-1.7-1.1-1.2 0-2.1.9-2.1 2.3s.9 2.3 2.1 2.3c.7 0 1.3-.4 1.7-1.1l1.3.8c-.5 1.1-1.6 1.9-3 1.9zm5.3-3.2v-1.1h1.1v-1.1h1.1v1.1h1.1v1.1h-1.1v1.1h-1.1v-1.1h-1.1zm2.8 0v-1.1h1.1v-1.1h1.1v1.1h1.1v1.1h-1.1v1.1h-1.1v-1.1h-1.1z"/>
-							</svg>
-							C++
-						</span>
-						<!-- C# mit offiziellem .NET C#-Hex-Logo -->
-						<span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800/80 text-xs font-medium text-neutral-300">
-							<svg class="w-3.5 h-3.5 text-purple-400 fill-current" viewBox="0 0 24 24">
-								<path d="M12 2L3 7.2v9.6L12 22l9-5.2V7.2L12 2zm-1.5 13.5c-2 0-3.3-1.4-3.3-3.5 0-2.1 1.3-3.5 3.3-3.5 1.3 0 2.3.6 2.8 1.6l-1.2.7c-.3-.6-.9-1-1.6-1-1.1 0-1.9.8-1.9 2.2s.8 2.2 1.9 2.2c.7 0 1.3-.4 1.6-1l1.2.7c-.5 1-1.5 1.6-2.8 1.6zm5.8-2h-.6l.2-1.2h.6v-.7h-.5l.2-1.1h-.7l-.2 1.1h-.9l.2-1.1h-.7l-.2 1.1h-.6v.7h.5l-.2 1.2h-.6v.7h.5l-.2 1.1h.7l.2-1.1h.9l-.2 1.1h.7l.2-1.1h.6v-.7zm-1.5 0h-.9l.2-1.2h.9l-.2 1.2z"/>
-							</svg>
-							C#
-						</span>
-						<span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800/80 text-xs font-medium text-neutral-300">
-							<span class="text-orange-500 font-bold text-xs">🦀</span>
-							Rust
-						</span>
-						<span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800/80 text-xs font-medium text-neutral-300">
-							<svg class="w-3.5 h-3.5 text-cyan-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-								<ellipse cx="12" cy="5" rx="9" ry="3"/>
-								<path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
-								<path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
-							</svg>
-							SQL
-						</span>
-						<span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800/80 text-xs font-medium text-neutral-300">
-							<span class="text-orange-400 font-bold text-xs">&gt;_</span>
-							Bash & Git
-						</span>
-						<span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800/80 text-xs font-medium text-neutral-300">
-							<svg class="w-3.5 h-3.5 text-indigo-400 fill-current" viewBox="0 0 24 24">
-								<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-4.7 13.3H5.8l.9-4.7c.1-.4.3-.7.6-.9.3-.2.7-.3 1.2-.3h1.4c.8 0 1.4.2 1.8.6.4.4.5 1 .3 1.8-.2 1-.7 1.8-1.4 2.3-.7.5-1.5.8-2.5.8h-.8l-.4 2.1v-1.7zm1.6-4.5h-.6l-.4 2h.6c.5 0 .9-.1 1.2-.4.3-.3.5-.7.6-1.1.1-.3 0-.5-.1-.7-.2-.2-.6-.3-1.1-.3zm4.5 4.5h-1.5l1.6-8.2h1.5l-.6 3.1h1.7c.8 0 1.4.2 1.8.6.4.4.5 1 .3 1.8-.2 1-.7 1.8-1.4 2.3-.7.5-1.5.8-2.5.8h-1.5l-.4 2.1v-2.5zm1.6-4.5h-.6l-.4 2h.6c.5 0 .9-.1 1.2-.4.3-.3.5-.7.6-1.1.1-.3 0-.5-.1-.7-.2-.2-.6-.3-1.1-.3z"/>
-							</svg>
-							PHP
-						</span>
-						<span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-neutral-900 border border-neutral-800/80 text-xs font-medium text-neutral-300">
-							<svg class="w-3.5 h-3.5 text-orange-500 fill-current" viewBox="0 0 24 24">
-								<path d="M4.14 2h15.72l-1.43 16.03L12 20.21l-6.43-2.18L4.14 2zm13.1 4.54H6.76l.3 3.37h8.86l-.37 4.14-3.55 1-3.55-1-.24-2.67H6.51l.46 4.4 5.03 1.39 5.03-1.39.73-8.24h-.02z"/>
-							</svg>
-							HTML5
-						</span>
-					</div>
-				</div>
-			</section>
+            html {
+                scroll-behavior: smooth;
+                background-color: var(--bg);
+                color: var(--text-main);
+                font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            }
 
-			<!-- PROJECTS SECTION -->
-			<section id="products" class="pt-24 sm:pt-32">
-				<!-- Section Header -->
-				<div class="mb-10">
-					<h2 class="text-xs uppercase tracking-widest text-neutral-400 font-semibold mb-2">x2XML</h2>
-					<h3 class="text-2xl sm:text-3xl font-bold text-white tracking-tight font-display">Software</h3>
-				</div>
+            ::selection {
+                background: #262626;
+                color: #fff;
+            }
 
-				<!-- Projects List (Volle Breite, untereinander) -->
-				<div class="flex flex-col gap-8">
+            /* Custom Scrollbar */
+            ::-webkit-scrollbar {
+                width: 7px;
+            }
+            ::-webkit-scrollbar-track {
+                background: #0a0a0a;
+            }
+            ::-webkit-scrollbar-thumb {
+                background: #262626;
+                border-radius: 9999px;
+            }
+            ::-webkit-scrollbar-thumb:hover {
+                background: #3a3a3a;
+            }
 
-					<!-- PROJECT 1 -->
-					<div class="group relative rounded-2xl bg-[#121212] border border-[#222222] hover:border-[#383838] transition-all duration-300 p-5 sm:p-6 flex flex-col md:flex-row gap-6 overflow-hidden items-stretch">          
-						<!-- Image Card Container (Links) -->
-						<div class="w-full md:w-72 lg:w-80 h-52 sm:h-60 md:h-auto shrink-0 rounded-xl bg-gradient-to-br from-neutral-900 to-neutral-950 border border-neutral-800 flex items-center justify-center relative overflow-hidden group-hover:scale-[1.01] transition-transform duration-300">
-							<div class="absolute inset-0 bg-radial from-sky-500/10 via-transparent to-transparent opacity-60"></div>
-							<!-- Mock preview mockup graphic -->
-							<div class="w-4/5 h-36 rounded-lg bg-neutral-900/90 border border-neutral-700/60 shadow-2xl p-3 flex flex-col justify-between">
-								<div class="flex items-center gap-1.5">
-									<span class="w-2 h-2 rounded-full bg-red-500/80"></span>
-									<span class="w-2 h-2 rounded-full bg-yellow-500/80"></span>
-									<span class="w-2 h-2 rounded-full bg-green-500/80"></span>
-								</div>
-								<div class="space-y-2">
-									<div class="h-2 w-2/3 bg-neutral-700 rounded"></div>
-									<div class="h-2 w-1/2 bg-neutral-800 rounded"></div>
-								</div>
-								<div class="h-5 w-full bg-neutral-800/60 rounded"></div>
-							</div>
-						</div>
-						<!-- Content Container (Rechts mit viel Platz) -->
-						<div class="flex-1 flex flex-col justify-between">
-							<div>
-								<div class="flex items-center justify-between gap-4">
-									<h4 class="text-xl font-bold text-white group-hover:text-sky-400 transition-colors">x2XML Reporter</h4>
-									<span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shrink-0">2.0.0.12</span>
-								</div>
-								<!-- Längere Beschreibung -->
-								<p class="mt-3 text-sm sm:text-base text-neutral-400 leading-relaxed font-normal">
-									Der x2XML Reporter ist eine professionelle Anwendung, mit der Sie Messdateien im ASAM ODS ATF/X Format auswerten und umfassende technische Berichte in Microsoft Word, Excel oder PowerPoint erstellen können. Libreoffice Writer, Calc und Impress werden ebenfalls unterstützt.
-									<br />
-									Verfügbar für Microsoft Windows und Linux
-								</p>
-							</div>
-							<!-- Footer / Tech-Stack & Link -->
-							<div class="mt-6 pt-4 border-t border-neutral-800/80 flex items-center justify-between text-xs sm:text-sm text-neutral-400">
-								<span class="text-neutral-500 font-mono">Python • PySide6</span>
-								<div class="flex items-center gap-3">
-									<a href="#" target="" rel="noopener noreferrer" title="Screenshot" class="hover:text-white transition-colors flex items-center gap-1.5">
-										<span>Screenshot</span>
-										<svg class="w-4 h-4 stroke-current fill-none" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
+            /* Subtle background grid pattern */
+            .bg-grid {
+                background-size: 36px 36px;
+                background-image: 
+                    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+                min-height: 100vh;
+                position: relative;
+                overflow-x: hidden;
+            }
 
-					<!-- PROJECT 2 -->
-					<div class="group relative rounded-2xl bg-[#121212] border border-[#222222] hover:border-[#383838] transition-all duration-300 p-5 sm:p-6 flex flex-col md:flex-row gap-6 overflow-hidden items-stretch">          
-						<!-- Image Card Container (Links) -->
-						<div class="w-full md:w-72 lg:w-80 h-52 sm:h-60 md:h-auto shrink-0 rounded-xl bg-gradient-to-br from-neutral-900 to-neutral-950 border border-neutral-800 flex items-center justify-center relative overflow-hidden group-hover:scale-[1.01] transition-transform duration-300">
-							<div class="absolute inset-0 bg-radial from-amber-500/10 via-transparent to-transparent opacity-60"></div>
-							<div class="w-4/5 h-36 rounded-lg bg-neutral-900/90 border border-neutral-700/60 shadow-2xl p-3 flex flex-col justify-between">
-								<div class="flex items-center justify-between">
-									<div class="h-3 w-16 bg-neutral-700 rounded"></div>
-									<div class="h-3 w-6 bg-amber-500/50 rounded-full"></div>
-								</div>
-								<div class="grid grid-cols-3 gap-2">
-									<div class="h-10 bg-neutral-800 rounded"></div>
-									<div class="h-10 bg-neutral-800 rounded"></div>
-									<div class="h-10 bg-neutral-800 rounded"></div>
-								</div>
-								<div class="h-2 w-3/4 bg-neutral-800 rounded"></div>
-							</div>
-						</div>
-						<!-- Content Container (Rechts) -->
-						<div class="flex-1 flex flex-col justify-between">
-							<div>
-								<div class="flex items-center justify-between gap-4">
-									<h4 class="text-xl font-bold text-white group-hover:text-amber-400 transition-colors">x2XML Creator</h4>
-									<span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20 shrink-0">2.0.0.10</span>
-								</div>
-								<p class="mt-3 text-sm sm:text-base text-neutral-400 leading-relaxed font-normal">
-									Mit dem x2XML Creator können Sie mühelos ATFX-Dateien erstellen, die problemlos in Ihre Mess-Software importiert werden können.
-									<br />
-									Eine moderne Webanwendung im Windows-Stil
-								</p>
-							</div>
-							<div class="mt-6 pt-4 border-t border-neutral-800/80 flex items-center justify-between text-xs sm:text-sm text-neutral-400">
-								<span class="text-neutral-500 font-mono">PHP • HTML • Javascript • CSS • SQL</span>
-								<div class="flex items-center gap-3">
-									<a href="#" target="" rel="noopener noreferrer" title="Live Preview" class="hover:text-white transition-colors flex items-center gap-1.5">
-										<span>Screenshot</span>
-										<svg class="w-4 h-4 stroke-current fill-none" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
+            /* Ambient Glow effect behind Hero */
+            .ambient-glow {
+                pointer-events: none;
+                position: fixed;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 700px;
+                height: 350px;
+                background: rgba(56, 189, 248, 0.1);
+                filter: blur(130px);
+                border-radius: 9999px;
+                z-index: -10;
+            }
 
-					<!-- PROJECT 3 -->
-					<div class="group relative rounded-2xl bg-[#121212] border border-[#222222] hover:border-[#383838] transition-all duration-300 p-5 sm:p-6 flex flex-col md:flex-row gap-6 overflow-hidden items-stretch">          
-						<!-- Image Card Container (Links) -->
-						<div class="w-full md:w-72 lg:w-80 h-52 sm:h-60 md:h-auto shrink-0 rounded-xl bg-gradient-to-br from-neutral-900 to-neutral-950 border border-neutral-800 flex items-center justify-center relative overflow-hidden group-hover:scale-[1.01] transition-transform duration-300">
-							<div class="absolute inset-0 bg-radial from-purple-500/10 via-transparent to-transparent opacity-60"></div>
-							<div class="w-4/5 h-36 rounded-lg bg-neutral-900/90 border border-neutral-700/60 shadow-2xl p-3 flex flex-col justify-between font-mono text-[10px] text-neutral-400">
-								<div class="flex items-center justify-between text-neutral-500 border-b border-neutral-800 pb-1">
-									<span>schema.graphql</span>
-									<span class="text-purple-400">v2.4</span>
-								</div>
-								<div class="space-y-1 text-purple-300/80">
-									<p>type Query {</p>
-									<p class="pl-2">documents: [Doc!]!</p>
-									<p>}</p>
-								</div>
-								<div class="h-2 w-1/3 bg-neutral-800 rounded"></div>
-							</div>
-						</div>
-						<!-- Content Container (Rechts) -->
-						<div class="flex-1 flex flex-col justify-between">
-							<div>
-								<div class="flex items-center justify-between gap-4">
-									<h4 class="text-xl font-bold text-white group-hover:text-purple-400 transition-colors">x2XML ZATFX Indexer</h4>
-									<span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-500/10 text-purple-400 border border-purple-500/20 shrink-0">0.1.0</span>
-								</div>
-								<p class="mt-3 text-sm sm:text-base text-neutral-400 leading-relaxed font-normal">
-									Indizieren Sie Ihre ZATFX-Dateien und suchen Sie dann schnell nach VIN, Hersteller, Motortyp oder Modell. Öffnet den Pfad zur ausgewählten ZATFX-Datei mit einem einfachen Klick.
-									<br />
-									Eine Windows-Anwendung – geschrieben in Rust.
-								</p>
-							</div>
-							<div class="mt-6 pt-4 border-t border-neutral-800/80 flex items-center justify-between text-xs sm:text-sm text-neutral-400">
-								<span class="text-neutral-500 font-mono">Rust • eGui</span>
-								<div class="flex items-center gap-3">
-									<a href="#" target="" rel="noopener noreferrer" title="Live Preview" class="hover:text-white transition-colors flex items-center gap-1.5">
-										<span>Screenshot</span>
-										<svg class="w-4 h-4 stroke-current fill-none" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
+            /* Floating Nav */
+            header.floating-header {
+                position: fixed;
+                top: 1.25rem;
+                left: 0;
+                right: 0;
+                z-index: 50;
+                display: flex;
+                justify-content: center;
+                padding: 0 1rem;
+            }
 
-					<!-- PROJECT 4 -->
-					<div class="group relative rounded-2xl bg-[#121212] border border-[#222222] hover:border-[#383838] transition-all duration-300 p-5 sm:p-6 flex flex-col md:flex-row gap-6 overflow-hidden items-stretch">          
-						<!-- Image Card Container (Links) -->
-						<div class="w-full md:w-72 lg:w-80 h-52 sm:h-60 md:h-auto shrink-0 rounded-xl bg-gradient-to-br from-neutral-900 to-neutral-950 border border-neutral-800 flex items-center justify-center relative overflow-hidden group-hover:scale-[1.01] transition-transform duration-300">
-							<div class="absolute inset-0 bg-radial from-rose-500/10 via-transparent to-transparent opacity-60"></div>
-							<div class="w-4/5 h-36 rounded-lg bg-neutral-900/90 border border-neutral-700/60 shadow-2xl p-3 flex flex-col justify-between">
-								<div class="flex items-center gap-2">
-									<div class="w-5 h-5 rounded-full bg-rose-500/20 border border-rose-500/40"></div>
-									<div class="h-2 w-20 bg-neutral-700 rounded"></div>
-								</div>
-								<div class="space-y-1.5">
-									<div class="h-1.5 w-full bg-neutral-800 rounded"></div>
-									<div class="h-1.5 w-4/5 bg-neutral-800 rounded"></div>
-								</div>
-								<div class="flex justify-end">
-									<div class="h-4 w-14 bg-rose-500/20 rounded"></div>
-								</div>
-							</div>
-						</div>
-						<!-- Content Container (Rechts) -->
-						<div class="flex-1 flex flex-col justify-between">
-							<div>
-								<div class="flex items-center justify-between gap-4">
-									<h4 class="text-xl font-bold text-white group-hover:text-rose-400 transition-colors">x2XML PassBy Stats</h4>
-									<span class="px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shrink-0">0.1.0</span>
-								</div>
-								<p class="mt-3 text-sm sm:text-base text-neutral-400 leading-relaxed font-normal">
-									Erstellen Sie Statistiken Ihrer PassBy-Fahrten. Die Statistiken werden als HTML- oder CSV-Datei ausgegeben. Zeigt die höchste FahrtID, das Messdatum und die maximale Fahrten-Anzahl der PassBy-Messungen in Ihrer Datei
-									<br />
-									Verfügbar für Microsoft Windows
-								</p>
-							</div>
-							<div class="mt-6 pt-4 border-t border-neutral-800/80 flex items-center justify-between text-xs sm:text-sm text-neutral-400">
-								<span class="text-neutral-500 font-mono">Python • Rust • Tkinter</span>
-								<div class="flex items-center gap-3">
-									<a href="#" target="" rel="noopener noreferrer" title="Live Preview" class="hover:text-white transition-colors flex items-center gap-1.5">
-										<span>Screenshot</span>
-										<svg class="w-4 h-4 stroke-current fill-none" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-									</a>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-			
-			<!-- CONTACT SECTION -->
-			<section id="contact" class="pt-24 sm:pt-32">
-				<div class="mb-10">
-					<h2 class="text-xs uppercase tracking-widest text-neutral-400 font-semibold mb-2">Lass Sie uns reden</h2>
-					<h3 class="text-2xl sm:text-3xl font-bold text-white tracking-tight font-display">Kontaktieren Sie uns</h3>
-				</div>
-				<div class="grid grid-cols-1 md:grid-cols-5 gap-8">
-					<!-- Left info column -->
-					<div class="md:col-span-2 space-y-6">
-						<p class="text-neutral-400 text-sm leading-relaxed">
-							Haben Sie eine Frage zu einem Produkt? Zögern Sie nicht, sich zu melden. Ich bin immer offen für Diskussionen über freiberufliche Tätigkeiten, Technologie-Stacks oder Vollzeitstellen.
-						</p>
-						<div class="space-y-4 pt-2">
-							<div>
-								<span class="block text-xs uppercase tracking-wider text-neutral-400 font-medium">Standort</span>
-								<span class="text-sm font-semibold text-neutral-200">Neuötting, Germany</span>
-							</div>
-							<div>
-								<span class="block text-xs uppercase tracking-wider text-neutral-400 font-medium">Direkt-E-Mail</span>
-								<a href="mailto:schilling@x2xml.com" class="text-sm font-semibold text-neutral-200 hover:text-white hover:underline">support@x2xml.com</a>
-							</div>
-						</div>
-					</div>
-					<!-- Right Form Column -->
-					<div class="md:col-span-3">
-						<form id="contactForm" class="p-6 sm:p-7 rounded-2xl bg-[#121212] border border-[#222222] space-y-4" onsubmit="handleFormSubmit(event)">
-							<div>
-								<label for="name" class="block text-xs font-medium text-neutral-400 mb-1.5">Ihr Name</label>
-								<input type="text" id="name" required placeholder="" class="w-full px-4 py-2.5 rounded-xl bg-[#181818] border border-neutral-800 text-sm text-neutral-200 placeholder-neutral-600 focus:outline-none focus:border-neutral-500 transition-colors">
-							</div>
-							<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-								<div>
-									<label for="email" class="block text-xs font-medium text-neutral-400 mb-1.5">Ihre Email</label>
-									<input type="email" id="email" required placeholder="" class="w-full px-4 py-2.5 rounded-xl bg-[#181818] border border-neutral-800 text-sm text-neutral-200 placeholder-neutral-600 focus:outline-none focus:border-neutral-500 transition-colors">
-								</div>
-								<div>
-									<label for="subject" class="block text-xs font-medium text-neutral-400 mb-1.5">Betreff</label>
-									<input type="text" id="subject" required placeholder="Neue Produktanfrage" class="w-full px-4 py-2.5 rounded-xl bg-[#181818] border border-neutral-800 text-sm text-neutral-200 placeholder-neutral-600 focus:outline-none focus:border-neutral-500 transition-colors">
-								</div>
-							</div>
-							<div>
-								<label for="message" class="block text-xs font-medium text-neutral-400 mb-1.5">Nachricht</label>
-								<textarea id="message" rows="4" required placeholder="Ihre Nachricht..." class="w-full px-4 py-2.5 rounded-xl bg-[#181818] border border-neutral-800 text-sm text-neutral-200 placeholder-neutral-600 focus:outline-none focus:border-neutral-500 transition-colors resize-none"></textarea>
-							</div>
-							<button type="submit" id="submitBtn" class="w-full py-3 rounded-xl bg-white text-black font-semibold text-sm hover:bg-neutral-200 active:scale-[0.99] transition-all flex items-center justify-center gap-2">
-								<span>Nachricht senden</span>
-								<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
-							</button>
-							<!-- Success notification box -->
-							<div id="formSuccess" class="hidden p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs text-center font-medium">
-								✅ Vielen Dank! Ihre Nachricht wurde erfolgreich gesendet.
-							</div>
-						</form>
-					</div>
-				</div>
-			</section>
-		</main>
-		<!-- FOOTER -->
-		<footer class="border-t border-neutral-900 bg-[#0a0a0a] py-12 px-6">
-			<div class="max-w-4xl mx-auto flex flex-col items-center space-y-6 text-center">
-				<!-- Copyright & Credits -->
-				<p class="text-xs text-neutral-400">
-					© <span id="year"></span> Bernhard Schilling XML Solutions
-				</p>
-			</div>
-		</footer>
+            nav.floating-nav {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.375rem 0.75rem;
+                border-radius: 9999px;
+                background: rgba(18, 18, 18, 0.85);
+                backdrop-filter: blur(12px);
+                border: 1px solid #262626;
+                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+                font-size: 0.875rem;
+                font-weight: 500;
+            }
 
-		<!-- Script logic -->
-		<script>
-			// Set dynamic copyright year
-			document.getElementById('year').textContent = new Date().getFullYear();
-			// Contact form submit handling without page reload
-			function handleFormSubmit(event) {
-				event.preventDefault();
-				const submitBtn = document.getElementById('submitBtn');
-				const formSuccess = document.getElementById('formSuccess');
-				// Feedback animation
-				submitBtn.disabled = true;
-				submitBtn.innerHTML = `
-					<svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-black" fill="none" viewBox="0 0 24 24">
-						<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-						<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-					</svg>
-					Sending...
-				`;
-				setTimeout(() => {
-					submitBtn.disabled = false;
-					submitBtn.innerHTML = `
-						<span>Send Message</span>
-						<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
-					`;
-					formSuccess.classList.remove('hidden');
-					document.getElementById('contactForm').reset();
-					setTimeout(() => {
-						formSuccess.classList.add('hidden');
-					}, 5000);
-				}, 900);
-			}
-		</script>
-	</body>
+            nav.floating-nav a {
+                color: #a3a3a3;
+                text-decoration: none;
+                padding: 0.375rem 0.875rem;
+                border-radius: 9999px;
+                font-size: 0.8125rem;
+                transition: all 0.2s ease;
+            }
+
+            nav.floating-nav a:hover {
+                color: #fff;
+                background: rgba(38, 38, 38, 0.8);
+            }
+
+            /* Main Layout */
+            main {
+                max-width: 56rem;
+                margin: 0 auto;
+                padding: 8rem 1.5rem 5rem 1.5rem;
+            }
+
+            /* Hero Section */
+            .hero-section {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1.5rem;
+            }
+
+            .badge {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.375rem 0.875rem;
+                border-radius: 9999px;
+                font-size: 0.75rem;
+                font-weight: 500;
+            }
+
+            .badge-author {
+                background: rgba(23, 23, 23, 0.9);
+                border: 1px solid #262626;
+                color: #a3a3a3;
+            }
+
+            .badge-author .dot {
+                width: 0.5rem;
+                height: 0.5rem;
+                border-radius: 9999px;
+                background: #10b981;
+            }
+
+            .hero-title {
+                font-family: 'Plus Jakarta Sans', sans-serif;
+                font-size: clamp(2.5rem, 7vw, 4.5rem);
+                font-weight: 800;
+                letter-spacing: -0.03em;
+                line-height: 1.05;
+                color: #fff;
+            }
+
+            .text-gradient {
+                background: linear-gradient(to right, #e5e5e5, #a3a3a3, #525252);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            .hero-desc {
+                font-size: 1.125rem;
+                color: #a3a3a3;
+                max-width: 42rem;
+                line-height: 1.6;
+            }
+
+            /* Marquee Ribbon */
+            .marquee-container {
+                margin-top: 4.5rem;
+                overflow: hidden;
+                position: relative;
+                border-top: 1px solid rgba(38, 38, 38, 0.8);
+                border-bottom: 1px solid rgba(38, 38, 38, 0.8);
+                padding: 1.25rem 0;
+                margin-left: -1.5rem;
+                margin-right: -1.5rem;
+            }
+
+            .fade-edge {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                width: 4rem;
+                z-index: 10;
+                pointer-events: none;
+            }
+
+            .fade-left {
+                left: 0;
+                background: linear-gradient(to right, #0a0a0a, transparent);
+            }
+
+            .fade-right {
+                right: 0;
+                background: linear-gradient(to left, #0a0a0a, transparent);
+            }
+
+            .marquee-content {
+                display: flex;
+                width: max-content;
+                animation: marquee 25s linear infinite;
+            }
+
+            .marquee-container:hover .marquee-content {
+                animation-play-state: paused;
+            }
+
+            .tech-batch {
+                display: flex;
+                align-items: center;
+                gap: 1.5rem;
+                padding-right: 1.5rem;
+            }
+
+            .tech-badge {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.375rem 0.875rem;
+                border-radius: 9999px;
+                background: #171717;
+                border: 1px solid rgba(38, 38, 38, 0.8);
+                font-size: 0.75rem;
+                font-weight: 500;
+                color: #d4d4d4;
+                white-space: nowrap;
+            }
+
+            .tech-badge svg {
+                width: 0.875rem;
+                height: 0.875rem;
+            }
+
+            @keyframes marquee {
+                0% { transform: translateX(0%); }
+                100% { transform: translateX(-50%); }
+            }
+
+            /* Products Section */
+            .products-section {
+                padding-top: 6rem;
+            }
+
+            .section-label {
+                font-size: 0.75rem;
+                text-transform: uppercase;
+                letter-spacing: 0.15em;
+                color: #a3a3a3;
+                font-weight: 600;
+                margin-bottom: 0.5rem;
+            }
+
+            .section-heading {
+                font-family: 'Plus Jakarta Sans', sans-serif;
+                font-size: 1.875rem;
+                font-weight: 700;
+                color: #fff;
+                letter-spacing: -0.02em;
+                margin-bottom: 2.5rem;
+            }
+
+            .projects-list {
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .project-card {
+                position: relative;
+                border-radius: 1rem;
+                background: var(--card);
+                border: 1px solid var(--border);
+                padding: 1.5rem;
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+                overflow: hidden;
+                transition: border-color 0.3s ease;
+            }
+
+            .project-card:hover {
+                border-color: var(--border-hover);
+            }
+
+            @media (min-width: 768px) {
+                .project-card {
+                    flex-direction: row;
+                    align-items: stretch;
+                }
+            }
+
+            .project-preview {
+                width: 100%;
+                height: 14rem;
+                flex-shrink: 0;
+                border-radius: 0.75rem;
+                background: linear-gradient(135deg, #171717, #0d0d0d);
+                border: 1px solid #262626;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                overflow: hidden;
+                transition: transform 0.3s ease;
+            }
+
+            .project-card:hover .project-preview {
+                transform: scale(1.01);
+            }
+
+            @media (min-width: 768px) {
+                .project-preview {
+                    width: 19rem;
+                    height: auto;
+                }
+            }
+
+            .preview-mockup {
+                width: 80%;
+                height: 9rem;
+                border-radius: 0.5rem;
+                background: rgba(23, 23, 23, 0.95);
+                border: 1px solid rgba(64, 64, 64, 0.6);
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+                padding: 0.75rem;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                z-index: 2;
+            }
+
+            .window-dots {
+                display: flex;
+                gap: 0.375rem;
+            }
+
+            .dot-red { width: 0.5rem; height: 0.5rem; border-radius: 9999px; background: rgba(239, 68, 68, 0.8); }
+            .dot-yellow { width: 0.5rem; height: 0.5rem; border-radius: 9999px; background: rgba(234, 179, 8, 0.8); }
+            .dot-green { width: 0.5rem; height: 0.5rem; border-radius: 9999px; background: rgba(34, 197, 94, 0.8); }
+
+            .project-info {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            .project-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 1rem;
+            }
+
+            .project-title {
+                font-size: 1.25rem;
+                font-weight: 700;
+                color: #fff;
+                transition: color 0.2s ease;
+            }
+
+            .project-card:hover .title-sky { color: var(--accent-sky); }
+            .project-card:hover .title-amber { color: var(--accent-amber); }
+            .project-card:hover .title-purple { color: var(--accent-purple); }
+            .project-card:hover .title-rose { color: var(--accent-rose); }
+
+            .version-tag {
+                padding: 0.125rem 0.625rem;
+                border-radius: 9999px;
+                font-size: 0.75rem;
+                font-weight: 500;
+                background: rgba(52, 211, 153, 0.1);
+                color: var(--accent-emerald);
+                border: 1px solid rgba(52, 211, 153, 0.2);
+                flex-shrink: 0;
+            }
+
+            .version-amber {
+                background: rgba(251, 191, 36, 0.1);
+                color: var(--accent-amber);
+                border-color: rgba(251, 191, 36, 0.2);
+            }
+
+            .version-purple {
+                background: rgba(192, 132, 252, 0.1);
+                color: var(--accent-purple);
+                border-color: rgba(192, 132, 252, 0.2);
+            }
+
+            .project-desc {
+                margin-top: 0.75rem;
+                font-size: 0.9375rem;
+                color: #a3a3a3;
+                line-height: 1.6;
+            }
+
+            .project-footer {
+                margin-top: 1.5rem;
+                padding-top: 1rem;
+                border-top: 1px solid rgba(38, 38, 38, 0.8);
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                font-size: 0.8125rem;
+            }
+
+            .tech-stack-font {
+                color: #737373;
+                font-family: monospace;
+            }
+
+            .screenshot-link {
+                color: #a3a3a3;
+                text-decoration: none;
+                display: flex;
+                align-items: center;
+                gap: 0.375rem;
+                transition: color 0.2s ease;
+            }
+
+            .screenshot-link:hover {
+                color: #fff;
+            }
+
+            /* Contact Section */
+            .contact-section {
+                padding-top: 6rem;
+            }
+
+            .contact-grid {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            @media (min-width: 768px) {
+                .contact-grid {
+                    grid-template-columns: 2fr 3fr;
+                }
+            }
+
+            .contact-info {
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .info-item {
+                display: flex;
+                flex-direction: column;
+                gap: 0.25rem;
+            }
+
+            .info-label {
+                font-size: 0.75rem;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                color: #737373;
+                font-weight: 500;
+            }
+
+            .info-val {
+                font-size: 0.875rem;
+                font-weight: 600;
+                color: #e5e5e5;
+                text-decoration: none;
+            }
+
+            .info-val:hover {
+                text-decoration: underline;
+                color: #fff;
+            }
+
+            .contact-form {
+                padding: 1.5rem;
+                border-radius: 1rem;
+                background: var(--card);
+                border: 1px solid var(--border);
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .form-group {
+                display: flex;
+                flex-direction: column;
+                gap: 0.375rem;
+            }
+
+            .form-row {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            @media (min-width: 640px) {
+                .form-row {
+                    grid-template-columns: 1fr 1fr;
+                }
+            }
+
+            label {
+                font-size: 0.75rem;
+                font-weight: 500;
+                color: #a3a3a3;
+            }
+
+            input, textarea {
+                width: 100%;
+                padding: 0.625rem 1rem;
+                border-radius: 0.75rem;
+                background: #181818;
+                border: 1px solid #262626;
+                font-size: 0.875rem;
+                color: #e5e5e5;
+                outline: none;
+                font-family: inherit;
+                transition: border-color 0.2s ease;
+            }
+
+            input:focus, textarea:focus {
+                border-color: #525252;
+            }
+
+            textarea {
+                resize: none;
+            }
+
+            .btn-submit {
+                width: 100%;
+                padding: 0.75rem;
+                border-radius: 0.75rem;
+                background: #ffffff;
+                color: #000000;
+                font-weight: 600;
+                font-size: 0.875rem;
+                border: none;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+                transition: background 0.2s ease, transform 0.1s ease;
+            }
+
+            .btn-submit:hover {
+                background: #e5e5e5;
+            }
+
+            .btn-submit:active {
+                transform: scale(0.99);
+            }
+
+            .form-success {
+                display: none;
+                padding: 0.75rem;
+                border-radius: 0.75rem;
+                background: rgba(52, 211, 153, 0.1);
+                border: 1px solid rgba(52, 211, 153, 0.2);
+                color: var(--accent-emerald);
+                font-size: 0.75rem;
+                text-align: center;
+                font-weight: 500;
+            }
+
+            /* Footer */
+            footer {
+                border-top: 1px solid #171717;
+                background: #0a0a0a;
+                padding: 3rem 1.5rem;
+                text-align: center;
+                font-size: 0.75rem;
+                color: #737373;
+            }
+
+            @keyframes spin {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+            .animate-spin {
+                animation: spin 1s linear infinite;
+            }
+        </style>
+    </head>
+    <body class="bg-grid">
+        <!-- Ambient Glow effect behind Hero -->
+        <div class="ambient-glow"></div>
+
+        <!-- FLOATING NAVIGATION BAR -->
+        <header class="floating-header">
+            <nav class="floating-nav">
+                <a href="#home">Start</a>
+                <a href="#products">Produkte</a>
+                <a href="#contact">Kontakt</a>
+            </nav>
+        </header>
+
+        <main>
+            <!-- HERO SECTION -->
+            <section id="home" class="hero-section">
+                <!-- Greeting Badge -->
+                <div class="badge badge-author">
+                    <span class="dot"></span>
+                    <span>Bernhard Schilling</span>
+                </div>
+                <!-- Main Headline -->
+                <div>
+                    <h1 class="hero-title">
+                        XML <br>
+                        <span class="text-gradient">Solutions</span>
+                    </h1>
+                </div>
+                <!-- Subtitle -->
+                <p class="hero-desc">
+                    Ideen in interaktive und nahtlose digitale Erlebnisse verwandeln.
+                </p>
+            </section>
+
+            <!-- TECH STACK MARQUEE RIBBON -->
+            <section class="marquee-container">
+                <div class="fade-edge fade-left"></div>
+                <div class="fade-edge fade-right"></div>
+                
+                <div class="marquee-content">
+                    <!-- Batch 1 -->
+                    <div class="tech-batch">
+                        <span class="tech-badge">
+                            <span style="color: var(--accent-amber); font-weight: bold;">JS</span>
+                            JavaScript
+                        </span>
+                        <span class="tech-badge">
+                            <span style="color: var(--accent-amber); font-weight: 600;">Py</span>
+                            Python
+                        </span>
+                        <span class="tech-badge">
+                            <span style="color: var(--accent-emerald); font-weight: bold;">Qt</span>
+                            PySide6
+                        </span>
+                        <!-- C++ -->
+                        <span class="tech-badge">
+                            <svg style="color: var(--accent-blue); fill: currentColor;" viewBox="0 0 24 24">
+                                <path d="M12 2L3 7.2v9.6L12 22l9-5.2V7.2L12 2zm-1.8 13.8c-2.1 0-3.6-1.5-3.6-3.8 0-2.3 1.5-3.8 3.6-3.8 1.4 0 2.5.7 3 1.8l-1.3.8c-.4-.7-1-1.1-1.7-1.1-1.2 0-2.1.9-2.1 2.3s.9 2.3 2.1 2.3c.7 0 1.3-.4 1.7-1.1l1.3.8c-.5 1.1-1.6 1.9-3 1.9zm5.3-3.2v-1.1h1.1v-1.1h1.1v1.1h1.1v1.1h-1.1v1.1h-1.1v-1.1h-1.1zm2.8 0v-1.1h1.1v-1.1h1.1v1.1h1.1v1.1h-1.1v1.1h-1.1v-1.1h-1.1z"/>
+                            </svg>
+                            C++
+                        </span>
+                        <!-- C# -->
+                        <span class="tech-badge">
+                            <svg style="color: var(--accent-purple); fill: currentColor;" viewBox="0 0 24 24">
+                                <path d="M12 2L3 7.2v9.6L12 22l9-5.2V7.2L12 2zm-1.5 13.5c-2 0-3.3-1.4-3.3-3.5 0-2.1 1.3-3.5 3.3-3.5 1.3 0 2.3.6 2.8 1.6l-1.2.7c-.3-.6-.9-1-1.6-1-1.1 0-1.9.8-1.9 2.2s.8 2.2 1.9 2.2c.7 0 1.3-.4 1.6-1l1.2.7c-.5 1-1.5 1.6-2.8 1.6zm5.8-2h-.6l.2-1.2h.6v-.7h-.5l.2-1.1h-.7l-.2 1.1h-.9l.2-1.1h-.7l-.2 1.1h-.6v.7h.5l-.2 1.2h-.6v.7h.5l-.2 1.1h.7l.2-1.1h.9l-.2 1.1h.7l.2-1.1h.6v-.7zm-1.5 0h-.9l.2-1.2h.9l-.2 1.2z"/>
+                            </svg>
+                            C#
+                        </span>
+                        <span class="tech-badge">
+                            <span style="font-size: 0.75rem;">🦀</span>
+                            Rust
+                        </span>
+                        <span class="tech-badge">
+                            <svg style="color: var(--accent-cyan);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+                                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+                            </svg>
+                            SQL
+                        </span>
+                        <span class="tech-badge">
+                            <span style="color: var(--accent-orange); font-weight: bold;">&gt;_</span>
+                            Bash & Git
+                        </span>
+                        <span class="tech-badge">
+                            <svg style="color: var(--accent-indigo); fill: currentColor;" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-4.7 13.3H5.8l.9-4.7c.1-.4.3-.7.6-.9.3-.2.7-.3 1.2-.3h1.4c.8 0 1.4.2 1.8.6.4.4.5 1 .3 1.8-.2 1-.7 1.8-1.4 2.3-.7.5-1.5.8-2.5.8h-.8l-.4 2.1v-1.7zm1.6-4.5h-.6l-.4 2h.6c.5 0 .9-.1 1.2-.4.3-.3.5-.7.6-1.1.1-.3 0-.5-.1-.7-.2-.2-.6-.3-1.1-.3zm4.5 4.5h-1.5l1.6-8.2h1.5l-.6 3.1h1.7c.8 0 1.4.2 1.8.6.4.4.5 1 .3 1.8-.2 1-.7 1.8-1.4 2.3-.7.5-1.5.8-2.5.8h-1.5l-.4 2.1v-2.5zm1.6-4.5h-.6l-.4 2h.6c.5 0 .9-.1 1.2-.4.3-.3.5-.7.6-1.1.1-.3 0-.5-.1-.7-.2-.2-.6-.3-1.1-.3z"/>
+                            </svg>
+                            PHP
+                        </span>
+                        <span class="tech-badge">
+                            <svg style="color: var(--accent-orange); fill: currentColor;" viewBox="0 0 24 24">
+                                <path d="M4.14 2h15.72l-1.43 16.03L12 20.21l-6.43-2.18L4.14 2zm13.1 4.54H6.76l.3 3.37h8.86l-.37 4.14-3.55 1-3.55-1-.24-2.67H6.51l.46 4.4 5.03 1.39 5.03-1.39.73-8.24h-.02z"/>
+                            </svg>
+                            HTML5
+                        </span>
+                    </div>
+
+                    <!-- Batch 2 (Duplicate for seamless loop) -->
+                    <div class="tech-batch">
+                        <span class="tech-badge">
+                            <span style="color: var(--accent-amber); font-weight: bold;">JS</span>
+                            JavaScript
+                        </span>
+                        <span class="tech-badge">
+                            <span style="color: var(--accent-amber); font-weight: 600;">Py</span>
+                            Python
+                        </span>
+                        <span class="tech-badge">
+                            <span style="color: var(--accent-emerald); font-weight: bold;">Qt</span>
+                            PySide6
+                        </span>
+                        <span class="tech-badge">
+                            <svg style="color: var(--accent-blue); fill: currentColor;" viewBox="0 0 24 24">
+                                <path d="M12 2L3 7.2v9.6L12 22l9-5.2V7.2L12 2zm-1.8 13.8c-2.1 0-3.6-1.5-3.6-3.8 0-2.3 1.5-3.8 3.6-3.8 1.4 0 2.5.7 3 1.8l-1.3.8c-.4-.7-1-1.1-1.7-1.1-1.2 0-2.1.9-2.1 2.3s.9 2.3 2.1 2.3c.7 0 1.3-.4 1.7-1.1l1.3.8c-.5 1.1-1.6 1.9-3 1.9zm5.3-3.2v-1.1h1.1v-1.1h1.1v1.1h1.1v1.1h-1.1v1.1h-1.1v-1.1h-1.1zm2.8 0v-1.1h1.1v-1.1h1.1v1.1h1.1v1.1h-1.1v1.1h-1.1v-1.1h-1.1z"/>
+                            </svg>
+                            C++
+                        </span>
+                        <span class="tech-badge">
+                            <svg style="color: var(--accent-purple); fill: currentColor;" viewBox="0 0 24 24">
+                                <path d="M12 2L3 7.2v9.6L12 22l9-5.2V7.2L12 2zm-1.5 13.5c-2 0-3.3-1.4-3.3-3.5 0-2.1 1.3-3.5 3.3-3.5 1.3 0 2.3.6 2.8 1.6l-1.2.7c-.3-.6-.9-1-1.6-1-1.1 0-1.9.8-1.9 2.2s.8 2.2 1.9 2.2c.7 0 1.3-.4 1.6-1l1.2.7c-.5 1-1.5 1.6-2.8 1.6zm5.8-2h-.6l.2-1.2h.6v-.7h-.5l.2-1.1h-.7l-.2 1.1h-.9l.2-1.1h-.7l-.2 1.1h-.6v.7h.5l-.2 1.2h-.6v.7h.5l-.2 1.1h.7l.2-1.1h.9l-.2 1.1h.7l.2-1.1h.6v-.7zm-1.5 0h-.9l.2-1.2h.9l-.2 1.2z"/>
+                            </svg>
+                            C#
+                        </span>
+                        <span class="tech-badge">
+                            <span style="font-size: 0.75rem;">🦀</span>
+                            Rust
+                        </span>
+                        <span class="tech-badge">
+                            <svg style="color: var(--accent-cyan);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+                                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+                            </svg>
+                            SQL
+                        </span>
+                        <span class="tech-badge">
+                            <span style="color: var(--accent-orange); font-weight: bold;">&gt;_</span>
+                            Bash & Git
+                        </span>
+                        <span class="tech-badge">
+                            <svg style="color: var(--accent-indigo); fill: currentColor;" viewBox="0 0 24 24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-4.7 13.3H5.8l.9-4.7c.1-.4.3-.7.6-.9.3-.2.7-.3 1.2-.3h1.4c.8 0 1.4.2 1.8.6.4.4.5 1 .3 1.8-.2 1-.7 1.8-1.4 2.3-.7.5-1.5.8-2.5.8h-.8l-.4 2.1v-1.7zm1.6-4.5h-.6l-.4 2h.6c.5 0 .9-.1 1.2-.4.3-.3.5-.7.6-1.1.1-.3 0-.5-.1-.7-.2-.2-.6-.3-1.1-.3zm4.5 4.5h-1.5l1.6-8.2h1.5l-.6 3.1h1.7c.8 0 1.4.2 1.8.6.4.4.5 1 .3 1.8-.2 1-.7 1.8-1.4 2.3-.7.5-1.5.8-2.5.8h-1.5l-.4 2.1v-2.5zm1.6-4.5h-.6l-.4 2h.6c.5 0 .9-.1 1.2-.4.3-.3.5-.7.6-1.1.1-.3 0-.5-.1-.7-.2-.2-.6-.3-1.1-.3z"/>
+                            </svg>
+                            PHP
+                        </span>
+                        <span class="tech-badge">
+                            <svg style="color: var(--accent-orange); fill: currentColor;" viewBox="0 0 24 24">
+                                <path d="M4.14 2h15.72l-1.43 16.03L12 20.21l-6.43-2.18L4.14 2zm13.1 4.54H6.76l.3 3.37h8.86l-.37 4.14-3.55 1-3.55-1-.24-2.67H6.51l.46 4.4 5.03 1.39 5.03-1.39.73-8.24h-.02z"/>
+                            </svg>
+                            HTML5
+                        </span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PRODUCTS SECTION -->
+            <section id="products" class="products-section">
+                <div>
+                    <h2 class="section-label">x2XML</h2>
+                    <h3 class="section-heading">Software</h3>
+                </div>
+
+                <div class="projects-list">
+                    <!-- PROJECT 1: Reporter -->
+                    <div class="project-card">
+                        <div class="project-preview">
+                            <div class="preview-mockup">
+                                <div class="window-dots">
+                                    <span class="dot-red"></span>
+                                    <span class="dot-yellow"></span>
+                                    <span class="dot-green"></span>
+                                </div>
+                                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                    <div style="height: 0.5rem; width: 66%; background: #404040; border-radius: 4px;"></div>
+                                    <div style="height: 0.5rem; width: 50%; background: #262626; border-radius: 4px;"></div>
+                                </div>
+                                <div style="height: 1.25rem; width: 100%; background: rgba(38, 38, 38, 0.6); border-radius: 4px;"></div>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <div>
+                                <div class="project-header">
+                                    <h4 class="project-title title-sky">x2XML Reporter</h4>
+                                    <span class="version-tag">2.0.0.12</span>
+                                </div>
+                                <p class="project-desc">
+                                    Der x2XML Reporter ist eine professionelle Anwendung, mit der Sie Messdateien im ASAM ODS ATF/X Format auswerten und umfassende technische Berichte in Microsoft Word, Excel oder PowerPoint erstellen können. LibreOffice Writer, Calc und Impress werden ebenfalls unterstützt.
+                                    <br><br>
+                                    Verfügbar für Microsoft Windows und Linux
+                                </p>
+                            </div>
+                            <div class="project-footer">
+                                <span class="tech-stack-font">Python • PySide6</span>
+                                <a href="#" class="screenshot-link" title="Screenshot">
+                                    <span>Screenshot</span>
+                                    <svg style="width: 1rem; height: 1rem;" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PROJECT 2: Creator -->
+                    <div class="project-card">
+                        <div class="project-preview">
+                            <div class="preview-mockup">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <div style="height: 0.75rem; width: 4rem; background: #404040; border-radius: 4px;"></div>
+                                    <div style="height: 0.75rem; width: 1.5rem; background: rgba(245, 158, 11, 0.5); border-radius: 9999px;"></div>
+                                </div>
+                                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;">
+                                    <div style="height: 2.5rem; background: #262626; border-radius: 4px;"></div>
+                                    <div style="height: 2.5rem; background: #262626; border-radius: 4px;"></div>
+                                    <div style="height: 2.5rem; background: #262626; border-radius: 4px;"></div>
+                                </div>
+                                <div style="height: 0.5rem; width: 75%; background: #262626; border-radius: 4px;"></div>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <div>
+                                <div class="project-header">
+                                    <h4 class="project-title title-amber">x2XML Creator</h4>
+                                    <span class="version-tag version-amber">2.0.0.10</span>
+                                </div>
+                                <p class="project-desc">
+                                    Mit dem x2XML Creator können Sie mühelos ATFX-Dateien erstellen, die problemlos in Ihre Mess-Software importiert werden können.
+                                    <br><br>
+                                    Eine moderne Webanwendung im Windows-Stil
+                                </p>
+                            </div>
+                            <div class="project-footer">
+                                <span class="tech-stack-font">PHP • HTML • JavaScript • CSS • SQL</span>
+                                <a href="#" class="screenshot-link" title="Screenshot">
+                                    <span>Screenshot</span>
+                                    <svg style="width: 1rem; height: 1rem;" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PROJECT 3: Indexer -->
+                    <div class="project-card">
+                        <div class="project-preview">
+                            <div class="preview-mockup" style="font-family: monospace; font-size: 10px; color: #a3a3a3;">
+                                <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #262626; padding-bottom: 0.25rem;">
+                                    <span>schema.graphql</span>
+                                    <span style="color: var(--accent-purple);">v2.4</span>
+                                </div>
+                                <div style="color: rgba(216, 180, 254, 0.8);">
+                                    <p>type Query {</p>
+                                    <p style="padding-left: 0.5rem;">documents: [Doc!]!</p>
+                                    <p>}</p>
+                                </div>
+                                <div style="height: 0.5rem; width: 33%; background: #262626; border-radius: 4px;"></div>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <div>
+                                <div class="project-header">
+                                    <h4 class="project-title title-purple">x2XML ZATFX Indexer</h4>
+                                    <span class="version-tag version-purple">0.1.0</span>
+                                </div>
+                                <p class="project-desc">
+                                    Indizieren Sie Ihre ZATFX-Dateien und suchen Sie dann schnell nach VIN, Hersteller, Motortyp oder Modell. Öffnet den Pfad zur ausgewählten ZATFX-Datei mit einem einfachen Klick.
+                                    <br><br>
+                                    Eine Windows-Anwendung – geschrieben in Rust.
+                                </p>
+                            </div>
+                            <div class="project-footer">
+                                <span class="tech-stack-font">Rust • eGui</span>
+                                <a href="#" class="screenshot-link" title="Screenshot">
+                                    <span>Screenshot</span>
+                                    <svg style="width: 1rem; height: 1rem;" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PROJECT 4: Stats -->
+                    <div class="project-card">
+                        <div class="project-preview">
+                            <div class="preview-mockup">
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <div style="width: 1.25rem; height: 1.25rem; border-radius: 9999px; background: rgba(244, 63, 94, 0.2); border: 1px solid rgba(244, 63, 94, 0.4);"></div>
+                                    <div style="height: 0.5rem; width: 5rem; background: #404040; border-radius: 4px;"></div>
+                                </div>
+                                <div style="display: flex; flex-direction: column; gap: 0.375rem;">
+                                    <div style="height: 0.375rem; width: 100%; background: #262626; border-radius: 4px;"></div>
+                                    <div style="height: 0.375rem; width: 80%; background: #262626; border-radius: 4px;"></div>
+                                </div>
+                                <div style="display: flex; justify-content: flex-end;">
+                                    <div style="height: 1rem; width: 3.5rem; background: rgba(244, 63, 94, 0.2); border-radius: 4px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="project-info">
+                            <div>
+                                <div class="project-header">
+                                    <h4 class="project-title title-rose">x2XML PassBy Stats</h4>
+                                    <span class="version-tag">0.1.0</span>
+                                </div>
+                                <p class="project-desc">
+                                    Erstellen Sie Statistiken Ihrer PassBy-Fahrten. Die Statistiken werden als HTML- oder CSV-Datei ausgegeben. Zeigt die höchste FahrtID, das Messdatum und die maximale Fahrten-Anzahl der PassBy-Messungen in Ihrer Datei.
+                                    <br><br>
+                                    Verfügbar für Microsoft Windows
+                                </p>
+                            </div>
+                            <div class="project-footer">
+                                <span class="tech-stack-font">Python • Rust • Tkinter</span>
+                                <a href="#" class="screenshot-link" title="Screenshot">
+                                    <span>Screenshot</span>
+                                    <svg style="width: 1rem; height: 1rem;" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- CONTACT SECTION -->
+            <section id="contact" class="contact-section">
+                <div>
+                    <h2 class="section-label">Lassen Sie uns reden</h2>
+                    <h3 class="section-heading">Kontaktieren Sie uns</h3>
+                </div>
+                <div class="contact-grid">
+                    <!-- Left info column -->
+                    <div class="contact-info">
+                        <p style="color: #a3a3a3; font-size: 0.875rem; line-height: 1.6;">
+                            Haben Sie eine Frage zu einem Produkt? Zögern Sie nicht, sich zu melden. Ich bin immer offen für Diskussionen über freiberufliche Tätigkeiten, Technologie-Stacks oder Projektanfragen.
+                        </p>
+                        <div class="info-item" style="margin-top: 0.5rem;">
+                            <span class="info-label">Standort</span>
+                            <span class="info-val" style="cursor: default;">Neuötting, Germany</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Direkt-E-Mail</span>
+                            <a href="mailto:support@x2xml.com" class="info-val">support@x2xml.com</a>
+                        </div>
+                    </div>
+                    <!-- Right Form Column -->
+                    <div>
+                        <form id="contactForm" class="contact-form" onsubmit="handleFormSubmit(event)">
+                            <div class="form-group">
+                                <label for="name">Ihr Name</label>
+                                <input type="text" id="name" required placeholder="Name">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="email">Ihre E-Mail</label>
+                                    <input type="email" id="email" required placeholder="name@domain.de">
+                                </div>
+                                <div class="form-group">
+                                    <label for="subject">Betreff</label>
+                                    <input type="text" id="subject" required value="Neue Produktanfrage">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Nachricht</label>
+                                <textarea id="message" rows="4" required placeholder="Ihre Nachricht..."></textarea>
+                            </div>
+                            <button type="submit" id="submitBtn" class="btn-submit">
+                                <span>Nachricht senden</span>
+                                <svg style="width: 1rem; height: 1rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+                            </button>
+                            <!-- Success notification box -->
+                            <div id="formSuccess" class="form-success">
+                                ✅ Vielen Dank! Ihre Nachricht wurde erfolgreich gesendet.
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- FOOTER -->
+        <footer>
+            <p>© <span id="year"></span> Bernhard Schilling XML Solutions</p>
+        </footer>
+
+        <!-- Script logic -->
+        <script>
+            // Set dynamic copyright year
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            // Contact form submit handling without page reload
+            function handleFormSubmit(event) {
+                event.preventDefault();
+                const submitBtn = document.getElementById('submitBtn');
+                const formSuccess = document.getElementById('formSuccess');
+
+                // Feedback animation
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = `
+                    <svg class="animate-spin" style="margin-left: -0.25rem; margin-right: 0.5rem; width: 1rem; height: 1rem; color: #000;" fill="none" viewBox="0 0 24 24">
+                        <circle style="opacity: 0.25;" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path style="opacity: 0.75;" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Senden...
+                `;
+
+                setTimeout(() => {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = `
+                        <span>Nachricht senden</span>
+                        <svg style="width: 1rem; height: 1rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+                    `;
+                    formSuccess.style.display = 'block';
+                    document.getElementById('contactForm').reset();
+                    setTimeout(() => {
+                        formSuccess.style.display = 'none';
+                    }, 5000);
+                }, 900);
+            }
+        </script>
+    </body>
 </html>
