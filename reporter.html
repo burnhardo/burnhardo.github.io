@@ -92,44 +92,39 @@
                 z-index: -10;
             }
 
-			/* Floating Nav – Mobile First für Unterseiten */
+			/* Floating Nav – Mobile First: Mehrzeiliger Umbruch ohne horizontales Scrollen */
 			header.floating-header {
 				position: fixed;
-				top: 0.75rem;
+				top: 0.6rem;
 				left: 0;
 				right: 0;
 				z-index: 50;
 				display: flex;
 				justify-content: center;
-				padding: 0 0.5rem;
+				padding: 0 0.75rem;
 			}
 
 			nav.floating-nav {
 				display: flex;
+				flex-wrap: wrap;
+				justify-content: center;
 				align-items: center;
-				gap: 0.25rem;
-				padding: 0.3rem 0.45rem;
-				border-radius: 9999px;
-				background: rgba(18, 18, 18, 0.85);
+				gap: 0.35rem 0.4rem;
+				padding: 0.4rem 0.6rem;
+				border-radius: 1rem;
+				background: rgba(18, 18, 18, 0.9);
 				backdrop-filter: blur(12px);
 				border: 1px solid #262626;
 				box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
-				max-width: 100%;
-				overflow-x: auto;
-				-webkit-overflow-scrolling: touch;
-				scrollbar-width: none; /* Versteckt Scrollbalken auf Firefox */
-			}
-
-			nav.floating-nav::-webkit-scrollbar {
-				display: none; /* Versteckt Scrollbalken auf Chrome/Safari/Vivaldi */
+				max-width: 24rem;
 			}
 
 			nav.floating-nav a {
 				color: #a3a3a3;
 				text-decoration: none;
-				padding: 0.35rem 0.6rem;
+				padding: 0.3rem 0.6rem;
 				border-radius: 9999px;
-				font-size: 0.775rem;
+				font-size: 0.8125rem;
 				font-weight: 500;
 				white-space: nowrap;
 				transition: all 0.2s ease;
@@ -140,7 +135,7 @@
 				background: rgba(38, 38, 38, 0.8);
 			}
 
-			/* Ab Tablet & Desktop: Deine gewünschten Maße */
+			/* Ab Tablet & Desktop: Wieder als einzeilige Kapsel/Pille */
 			@media (min-width: 768px) {
 				header.floating-header {
 					top: 1.25rem;
@@ -148,8 +143,11 @@
 				}
 
 				nav.floating-nav {
+					flex-wrap: nowrap;
 					gap: 0.75rem;
 					padding: 0.5rem 1rem;
+					border-radius: 9999px;
+					max-width: none;
 					font-size: 1rem;
 				}
 
