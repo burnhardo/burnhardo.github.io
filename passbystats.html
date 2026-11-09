@@ -92,44 +92,71 @@
                 z-index: -10;
             }
 
-            /* Floating Nav */
-            header.floating-header {
-                position: fixed;
-                top: 1.25rem;
-                left: 0;
-                right: 0;
-                z-index: 50;
-                display: flex;
-                justify-content: center;
-                padding: 0 1rem;
-            }
+			/* Floating Nav – Mobile First für Unterseiten */
+			header.floating-header {
+				position: fixed;
+				top: 0.75rem;
+				left: 0;
+				right: 0;
+				z-index: 50;
+				display: flex;
+				justify-content: center;
+				padding: 0 0.5rem;
+			}
 
 			nav.floating-nav {
 				display: flex;
 				align-items: center;
-				gap: 0.75rem;
-				padding: 0.5rem 1rem;
+				gap: 0.25rem;
+				padding: 0.3rem 0.45rem;
 				border-radius: 9999px;
 				background: rgba(18, 18, 18, 0.85);
 				backdrop-filter: blur(12px);
 				border: 1px solid #262626;
 				box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
-				font-size: 1rem;
-				font-weight: 500;
+				max-width: 100%;
+				overflow-x: auto;
+				-webkit-overflow-scrolling: touch;
+				scrollbar-width: none; /* Versteckt Scrollbalken auf Firefox */
+			}
+
+			nav.floating-nav::-webkit-scrollbar {
+				display: none; /* Versteckt Scrollbalken auf Chrome/Safari/Vivaldi */
 			}
 
 			nav.floating-nav a {
 				color: #a3a3a3;
 				text-decoration: none;
-				padding: 0.5rem 1.125rem;
+				padding: 0.35rem 0.6rem;
 				border-radius: 9999px;
-				font-size: 0.9375rem;
+				font-size: 0.775rem;
+				font-weight: 500;
+				white-space: nowrap;
 				transition: all 0.2s ease;
 			}
 
 			nav.floating-nav a:hover {
 				color: #fff;
 				background: rgba(38, 38, 38, 0.8);
+			}
+
+			/* Ab Tablet & Desktop: Deine gewünschten Maße */
+			@media (min-width: 768px) {
+				header.floating-header {
+					top: 1.25rem;
+					padding: 0 1rem;
+				}
+
+				nav.floating-nav {
+					gap: 0.75rem;
+					padding: 0.5rem 1rem;
+					font-size: 1rem;
+				}
+
+				nav.floating-nav a {
+					padding: 0.5rem 1.125rem;
+					font-size: 0.9375rem;
+				}
 			}
 
             /* Main Layout */
