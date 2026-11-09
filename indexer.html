@@ -443,40 +443,34 @@
                 </div>
             </section>
 
-            <!-- WORKFLOW / ANWENDUNGSBEREICH -->
+			<!-- WORKFLOW / ANWENDUNGSBEREICH (Reine Textansicht ohne Bilder) -->
             <section id="workflow" style="margin-top: 5rem;">
                 <h2 class="section-label">Workflow & Praxisnutzen</h2>
                 <h3 class="section-heading">Messvorbereitung & Archivsuche beschleunigen</h3>
 
-                <div style="background: var(--card); border: 1px solid var(--border); border-radius: 1rem; padding: 2rem; display: flex; flex-direction: column; gap: 1.5rem;">
-                    <div>
-                        <h4 style="color: #fff; font-size: 1.15rem; font-weight: 600; margin-bottom: 0.5rem;">
-                            Verlorene Messungen im Handumdrehen auffinden
-                        </h4>
-                        <p style="color: var(--text-muted); font-size: 0.9375rem; line-height: 1.6;">
-                            Im Prüfalltag sammeln sich Tausende ZATFX-Messdateien über komplexe Laufwerksstrukturen an:
+                <div style="display: grid; grid-template-columns: 1fr; gap: 1.5rem;">
+                    <!-- Workflow 1: Archivierte Messungen -->
+                    <div style="background: var(--card); border: 1px solid var(--border); border-radius: 1rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; border-left: 3px solid var(--accent-purple);">
+                        <h4 style="color: #fff; font-size: 1.15rem; font-weight: 600;">1. Archivierte Messungen aufspüren</h4>
+                        <p style="color: var(--text-muted); font-size: 0.875rem; line-height: 1.6;">
+                            Suchen Sie gezielt nach alten Prüfergebnissen für Vergleichsgutachten oder Berichte, deren genauer Speicherort im Netzwerk nicht mehr bekannt ist.
                         </p>
                     </div>
 
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.25rem;">
-                        <div style="background: #181818; border: 1px solid #262626; border-radius: 0.75rem; padding: 1.25rem;">
-                            <span style="color: var(--accent-purple); font-weight: 700; font-size: 0.875rem;">1. Archivierte Messungen</span>
-                            <p style="color: var(--text-muted); font-size: 0.8125rem; line-height: 1.5; margin-top: 0.35rem;">
-                                Suchen Sie gezielt nach alten Prüfergebnissen für Vergleichsgutachten, deren Speicherort nicht mehr bekannt ist.
-                            </p>
-                        </div>
-                        <div style="background: #181818; border: 1px solid #262626; border-radius: 0.75rem; padding: 1.25rem;">
-                            <span style="color: var(--accent-purple); font-weight: 700; font-size: 0.875rem;">2. Vorbereitete Messdateien</span>
-                            <p style="color: var(--text-muted); font-size: 0.8125rem; line-height: 1.5; margin-top: 0.35rem;">
-                                Finden Sie frisch konfigurierte, noch ungemessene ZATFX-Vorlagen für anstehende Prüfungen sofort wieder.
-                            </p>
-                        </div>
-                        <div style="background: #181818; border: 1px solid #262626; border-radius: 0.75rem; padding: 1.25rem;">
-                            <span style="color: var(--accent-purple); font-weight: 700; font-size: 0.875rem;">3. Kein Pfad-Durchhangeln</span>
-                            <p style="color: var(--text-muted); font-size: 0.8125rem; line-height: 1.5; margin-top: 0.35rem;">
-                                Statt sich durch 8 Ordnerebenen zu klicken: Suchbegriff tippen, Pfad anklicken, fertig.
-                            </p>
-                        </div>
+                    <!-- Workflow 2: Vorbereitete Vorlagen -->
+                    <div style="background: var(--card); border: 1px solid var(--border); border-radius: 1rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; border-left: 3px solid var(--accent-purple);">
+                        <h4 style="color: #fff; font-size: 1.15rem; font-weight: 600;">2. Vorbereitete Messdateien wiederfinden</h4>
+                        <p style="color: var(--text-muted); font-size: 0.875rem; line-height: 1.6;">
+                            Finden Sie frisch konfigurierte, noch ungemessene ZATFX-Vorlagen für anstehende Prüfungen sofort wieder, ohne Verzeichnisstrukturen manuell zu durchforsten.
+                        </p>
+                    </div>
+
+                    <!-- Workflow 3: 1-Klick-Workflow -->
+                    <div style="background: var(--card); border: 1px solid var(--border); border-radius: 1rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; border-left: 3px solid var(--accent-purple);">
+                        <h4 style="color: #fff; font-size: 1.15rem; font-weight: 600;">3. Sofortiger Pfadzugriff</h4>
+                        <p style="color: var(--text-muted); font-size: 0.875rem; line-height: 1.6;">
+                            Statt sich durch verschachtelte Ordnerebenen zu klicken: Suchbegriff eingeben, Treffer auswählen und den Ordner mit einem Klick direkt im Dateimanager öffnen.
+                        </p>
                     </div>
                 </div>
             </section>
