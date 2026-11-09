@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>x2XML Creator - Bernhard Schilling XMLSolutions</title>
+  
+        <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+  
+        <style>
+            :root {
+                --bg: #0a0a0a;
+                --card: #121212;
+                --card-hover: #181818;
+                --border: #222222;
+                --border-hover: #383838;
+                --border-subtle: rgba(38, 38, 38, 0.8);
+                --text-main: #e5e5e5;
+                --text-muted: #8e8e93;
+                --text-white: #ffffff;
+                --accent-sky: #38bdf8;
+                --accent-amber: #fbbf24;
+                --accent-purple: #c084fc;
+                --accent-rose: #fb7185;
+                --accent-emerald: #34d399;
+                --accent-blue: #3b82f6;
+                --accent-indigo: #818cf8;
+                --accent-cyan: #22d3ee;
+                --accent-orange: #f97316;
+            }
+
+            *, *::before, *::after {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            html {
+                scroll-behavior: smooth;
+                background-color: var(--bg);
+                color: var(--text-main);
+                font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            }
+
+            ::selection {
+                background: #262626;
+                color: #fff;
+            }
+
+            /* Custom Scrollbar */
+            ::-webkit-scrollbar {
+                width: 7px;
+            }
+            ::-webkit-scrollbar-track {
+                background: #0a0a0a;
+            }
+            ::-webkit-scrollbar-thumb {
+                background: #262626;
+                border-radius: 9999px;
+            }
+            ::-webkit-scrollbar-thumb:hover {
+                background: #3a3a3a;
+            }
+
+            /* Subtle background grid pattern */
+            .bg-grid {
+                background-size: 36px 36px;
+                background-image: 
+                    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+                min-height: 100vh;
+                position: relative;
+                overflow-x: hidden;
+            }
+
+            /* Ambient Glow effect behind Hero (Warm Amber for Creator) */
+            .ambient-glow {
+                pointer-events: none;
+                position: fixed;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 700px;
+                height: 350px;
+                background: rgba(251, 191, 36, 0.08);
+                filter: blur(130px);
+                border-radius: 9999px;
+                z-index: -10;
+            }
+
+            /* Floating Nav */
+            header.floating-header {
+                position: fixed;
+                top: 1.25rem;
+                left: 0;
+                right: 0;
+                z-index: 50;
+                display: flex;
+                justify-content: center;
+                padding: 0 1rem;
+            }
+
+			nav.floating-nav {
+				display: flex;
+				align-items: center;
+				gap: 0.75rem;
+				padding: 0.5rem 1rem;
+				border-radius: 9999px;
+				background: rgba(18, 18, 18, 0.85);
+				backdrop-filter: blur(12px);
+				border: 1px solid #262626;
+				box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+				font-size: 1rem;
+				font-weight: 500;
+			}
+
+			nav.floating-nav a {
+				color: #a3a3a3;
+				text-decoration: none;
+				padding: 0.5rem 1.125rem;
+				border-radius: 9999px;
+				font-size: 0.9375rem;
+				transition: all 0.2s ease;
+			}
+
+			nav.floating-nav a:hover {
+				color: #fff;
+				background: rgba(38, 38, 38, 0.8);
+			}
+
+
+            /* Main Layout */
+            main {
+                max-width: 56rem;
+                margin: 0 auto;
+                padding: 8rem 1.5rem 5rem 1.5rem;
+            }
+
+            /* Hero Section */
+            .hero-section {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1.5rem;
+            }
+
+            .badge {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.375rem 0.875rem;
+                border-radius: 9999px;
+                font-size: 0.75rem;
+                font-weight: 500;
+            }
+
+            .badge-author {
+                background: rgba(23, 23, 23, 0.9);
+                border: 1px solid #262626;
+                color: #a3a3a3;
+            }
+
+            .badge-author .dot {
+                width: 0.5rem;
+                height: 0.5rem;
+                border-radius: 9999px;
+                background: var(--accent-amber);
+            }
+
+            .hero-title {
+                font-family: 'Plus Jakarta Sans', sans-serif;
+                font-size: clamp(2.5rem, 7vw, 4.5rem);
+                font-weight: 800;
+                letter-spacing: -0.03em;
+                line-height: 1.05;
+                color: #fff;
+            }
+
+            .text-gradient {
+                background: linear-gradient(to right, #ffffff, #fef08a, #ca8a04);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            .hero-desc {
+                font-size: 1.125rem;
+                color: #a3a3a3;
+                max-width: 44rem;
+                line-height: 1.6;
+            }
+
+            .version-tag {
+                padding: 0.125rem 0.625rem;
+                border-radius: 9999px;
+                font-size: 0.75rem;
+                font-weight: 500;
+                background: rgba(251, 191, 36, 0.1);
+                color: var(--accent-amber);
+                border: 1px solid rgba(251, 191, 36, 0.25);
+                flex-shrink: 0;
+            }
+
+            .tech-badge {
+                display: inline-flex;
+                align-items: center;
+                gap: 0.5rem;
+                padding: 0.25rem 0.75rem;
+                border-radius: 9999px;
+                background: #171717;
+                border: 1px solid rgba(38, 38, 38, 0.8);
+                font-size: 0.75rem;
+                font-weight: 500;
+                color: #d4d4d4;
+                white-space: nowrap;
+            }
+
+            /* Window Mockup Dots */
+            .dot-red { width: 0.5rem; height: 0.5rem; border-radius: 9999px; background: rgba(239, 68, 68, 0.8); }
+            .dot-yellow { width: 0.5rem; height: 0.5rem; border-radius: 9999px; background: rgba(234, 179, 8, 0.8); }
+            .dot-green { width: 0.5rem; height: 0.5rem; border-radius: 9999px; background: rgba(34, 197, 94, 0.8); }
+
+            .section-label {
+                font-size: 0.75rem;
+                text-transform: uppercase;
+                letter-spacing: 0.15em;
+                color: #a3a3a3;
+                font-weight: 600;
+                margin-bottom: 0.5rem;
+            }
+
+            .section-heading {
+                font-family: 'Plus Jakarta Sans', sans-serif;
+                font-size: 1.875rem;
+                font-weight: 700;
+                color: #fff;
+                letter-spacing: -0.02em;
+                margin-bottom: 2.5rem;
+            }
+
+            .btn-submit {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                gap: 0.5rem;
+                padding: 0.75rem 2rem;
+                border-radius: 0.75rem;
+                background: #ffffff;
+                color: #000000;
+                font-weight: 600;
+                font-size: 0.875rem;
+                text-decoration: none;
+                border: none;
+                cursor: pointer;
+                transition: background 0.2s ease, transform 0.1s ease;
+            }
+
+            .btn-submit:hover {
+                background: #e5e5e5;
+            }
+
+            .btn-submit:active {
+                transform: scale(0.99);
+            }
+
+            /* Footer */
+            footer {
+                border-top: 1px solid #171717;
+                background: #0a0a0a;
+                padding: 3rem 1.5rem;
+                text-align: center;
+                font-size: 0.75rem;
+                color: #737373;
+            }
+        </style>
+    </head>
+    <body class="bg-grid">
+        <!-- Ambient Glow effect behind Hero -->
+        <div class="ambient-glow"></div>
+
+        <!-- FLOATING NAVIGATION BAR -->
+        <header class="floating-header">
+            <nav class="floating-nav">
+                <a href="index.html#products">← Zurück zur Übersicht</a>
+                <a href="#config">Konfiguration</a>
+                <a href="#features">Funktionen</a>
+                <a href="#workflow">Workflows</a>
+                <a href="#security">Datenschutz & Speicher</a>
+                <a href="#contact">Kontakt</a>
+            </nav>
+        </header>
+
+        <main>
+            <!-- HERO / TITEL -->
+            <section class="hero-section">
+                <div class="badge badge-author">
+                    <span class="dot"></span>
+                    <span>x2XML Software Suite</span>
+                </div>
+                <div>
+                    <h1 class="hero-title">
+                        x2XML <br>
+                        <span class="text-gradient">Creator</span>
+                    </h1>
+                </div>
+                <p class="hero-desc">
+                    Professionelle Webanwendung zur mühelosen Erstellung und Konfiguration von ASAM ODS ATFX-Dateien direkt im Webbrowser. Entwickelt für die schnelle, fehlerfreie Vorbereitung von Akustikmessungen für Sachverständige und Prüflabore.
+                </p>
+
+                <!-- Version & Plattform-Badges -->
+                <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.5rem;">
+                    <span class="version-tag">Version 2.0.0.10</span>
+                    <span class="tech-badge">Plattformunabhängig (Web)</span>
+                    <span class="tech-badge">Jeder moderne Browser</span>
+                    <span class="tech-badge">PHP • HTML5 • JS • CSS • SQL</span>
+                </div>
+            </section>
+
+            <!-- HAUPT-SCREENSHOT (Große Hero-Vorschau) -->
+            <section style="margin-top: 3.5rem;">
+                <div style="border-radius: 1rem; border: 1px solid var(--border); overflow: hidden; background: var(--card); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);">
+                    <div style="padding: 0.75rem 1rem; background: #171717; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 0.5rem;">
+                        <span class="dot-red"></span>
+                        <span class="dot-yellow"></span>
+                        <span class="dot-green"></span>
+                        <span style="font-size: 0.75rem; color: #737373; font-family: monospace; margin-left: 0.5rem;">x2XML Creator – Web-Oberfläche</span>
+                    </div>
+                    <img 
+                        src="creator.png" 
+                        alt="x2XML Creator Webanwendung Hauptansicht" 
+                        style="width: 100%; height: auto; display: block;"
+                        loading="lazy"
+                    >
+                </div>
+            </section>
+
+			<!-- FAHRZEUGKONFIGURATION & VARIANTENMANAGEMENT -->
+			<section id="config" style="margin-top: 5rem;">
+				<h2 class="section-label">Konfiguration</h2>
+				<h3 class="section-heading">Umfassende Fahrzeugdaten & Variantenmanagement</h3>
+
+				<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem;">
+					<!-- Box 1: Stammdaten -->
+					<div style="background: var(--card); border: 1px solid var(--border); border-radius: 0.875rem; padding: 1.5rem; border-top: 3px solid var(--accent-amber);">
+						<div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem;">
+							<h4 style="color: #fff; font-size: 1.1rem; font-weight: 700;">Fahrzeug-Stammdaten</h4>
+							<span style="font-size: 0.75rem; color: var(--accent-amber); font-family: monospace;">Basisdaten</span>
+						</div>
+						<p style="color: var(--text-muted); font-size: 0.8125rem; line-height: 1.5; margin-bottom: 0.75rem;">
+							Zentrale Erfassung aller prüfrelevanten Fahrzeugparameter:
+						</p>
+						<ul style="list-style: none; padding: 0; margin: 0; font-size: 0.8125rem; color: #d4d4d4; display: flex; flex-direction: column; gap: 0.35rem;">
+							<li>• Hersteller, Modell, VIN & Handelsbezeichnung</li>
+							<li>• Motorisierung, Getriebe & Antriebsstrang</li>
+							<li>• Gewichts- & Leistungsparameter</li>
+							<li>• Strecken- & Messaufbau-Parameter</li>
+						</ul>
+					</div>
+
+					<!-- Box 2: Abgasanlagen & Baugruppen -->
+					<div style="background: var(--card); border: 1px solid var(--border); border-radius: 0.875rem; padding: 1.5rem; border-top: 3px solid var(--accent-sky);">
+						<div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem;">
+							<h4 style="color: #fff; font-size: 1.1rem; font-weight: 700;">Variable Komponenten</h4>
+							<span style="font-size: 0.75rem; color: var(--accent-sky); font-family: monospace;">Auspuff & Klappen</span>
+						</div>
+						<p style="color: var(--text-muted); font-size: 0.8125rem; line-height: 1.5; margin-bottom: 0.75rem;">
+							Flexible Datensätze für wechselnde Hardwarestände:
+						</p>
+						<ul style="list-style: none; padding: 0; margin: 0; font-size: 0.8125rem; color: #d4d4d4; display: flex; flex-direction: column; gap: 0.35rem;">
+							<li>• Mehrere Abgasanlagen-Konfigurationen</li>
+							<li>• Klappensteuerungen & Schalldämpfervarianten</li>
+							<li>• Software- & Fahrprofil-Zustände</li>
+							<li>• Spezifische Anbau- und Zubehörteile</li>
+						</ul>
+					</div>
+
+					<!-- Box 3: Reifensätze & Fahrwerk -->
+					<div style="background: var(--card); border: 1px solid var(--border); border-radius: 0.875rem; padding: 1.5rem; border-top: 3px solid var(--accent-emerald);">
+						<div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem;">
+							<h4 style="color: #fff; font-size: 1.1rem; font-weight: 700;">Reifensätze & Räder</h4>
+							<span style="font-size: 0.75rem; color: var(--accent-emerald); font-family: monospace;">Reifenvarianten</span>
+						</div>
+						<p style="color: var(--text-muted); font-size: 0.8125rem; line-height: 1.5; margin-bottom: 0.75rem;">
+							Parallele Verwaltung unterschiedlicher Reifenkombinationen:
+						</p>
+						<ul style="list-style: none; padding: 0; margin: 0; font-size: 0.8125rem; color: #d4d4d4; display: flex; flex-direction: column; gap: 0.35rem;">
+							<li>• Mehrere Reifensätze pro Fahrzeug</li>
+							<li>• Dimensionen (Vorder- und Hinterachse)</li>
+							<li>• Hersteller, Profiltyp & Kennzeichnungen</li>
+							<li>• Reifendruck- und Zustandsangaben</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
+            <!-- HIGHLIGHTS / FUNKTIONEN (Grid) -->
+            <section id="features" style="margin-top: 5rem;">
+                <h2 class="section-label">Funktionsumfang</h2>
+                <h3 class="section-heading">Effiziente Vorbereitung im Browser</h3>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+                    <!-- Box 1: Reines Browser-Tool -->
+                    <div style="background: var(--card); border: 1px solid var(--border); border-radius: 0.875rem; padding: 1.5rem;">
+                        <h4 style="color: #fff; font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Plattformunabhängig</h4>
+                        <p style="color: var(--text-muted); font-size: 0.875rem; line-height: 1.6;">
+                            Als vollwertige Webanwendung läuft der x2XML Creator direkt in jedem modernen Webbrowser (Chrome, Firefox, Edge, Safari) – ganz ohne lokale Softwareinstallation oder Administratorrechte.
+                        </p>
+                    </div>
+
+                    <!-- Box 2: Zusammenarbeit Sachverständige & Kunden -->
+                    <div style="background: var(--card); border: 1px solid var(--border); border-radius: 0.875rem; padding: 1.5rem;">
+                        <h4 style="color: #fff; font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Kollaborative Messvorbereitung</h4>
+                        <p style="color: var(--text-muted); font-size: 0.875rem; line-height: 1.6;">
+                            Bereiten Sie Messungen im Vorfeld zeiteffizient vor. Unternehmen und Kunden, für die Sie als Sachverständiger tätig sind, können die Messdateien und Fahrzeugdaten eigenständig vorab erfassen.
+                        </p>
+                    </div>
+
+                    <!-- Box 3: ATFX Generierung -->
+                    <div style="background: var(--card); border: 1px solid var(--border); border-radius: 0.875rem; padding: 1.5rem;">
+                        <h4 style="color: #fff; font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Nahtloser Mess-Import</h4>
+                        <p style="color: var(--text-muted); font-size: 0.875rem; line-height: 1.6;">
+                            Erzeugt standardkonforme ASAM ODS ATFX-Konfigurationsdateien, die sich ohne manuelle Nachbearbeitung direkt in Ihre Mess-Software (z. B. PAK pass-by) importieren lassen.
+                        </p>
+                    </div>
+
+                    <!-- Box 4: CSV & ATFX Dateiaustausch -->
+                    <div style="background: var(--card); border: 1px solid var(--border); border-radius: 0.875rem; padding: 1.5rem;">
+                        <h4 style="color: #fff; font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Flexibler CSV- & ATFX-Austausch</h4>
+                        <p style="color: var(--text-muted); font-size: 0.875rem; line-height: 1.6;">
+                            Importieren Sie vorhandene ATFX- oder vordefinierte CSV-Dateien und exportieren Sie Stände als CSV für einen unkomplizierten, schnellen Dateiaustausch zwischen verschiedenen Projektbeteiligten.
+                        </p>
+                    </div>
+					
+					<!-- Box: Kundenspezifischer Excel-Import -->
+					<div style="background: var(--card); border: 1px solid var(--border); border-radius: 0.875rem; padding: 1.5rem;">
+						<h4 style="color: #fff; font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Kundenspezifischer Excel-Import</h4>
+						<p style="color: var(--text-muted); font-size: 0.875rem; line-height: 1.6;">
+							Bestehende interne Excel-Listen oder herstellerspezifische Tabellenformate können direkt angebunden werden. Diese Schnittstelle wird auf Anfrage exakt an Ihre individuellen Datenstrukturen angepasst und implementiert.
+						</p>
+					</div>
+
+					<!-- Box: Excel-Vorlagen-Unterstützung -->
+					<div style="background: var(--card); border: 1px solid var(--border); border-radius: 0.875rem; padding: 1.5rem;">
+						<h4 style="color: #fff; font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem;">Vorlagen im Excel-Format</h4>
+						<p style="color: var(--text-muted); font-size: 0.875rem; line-height: 1.6;">
+							Generelle Unterstützung für vorkonfigurierte Vorlagen im Microsoft Excel-Format (.xlsx). Damit lassen sich wiederkehrende Messaufbauten und Datensätze schnell und gewohnt strukturieren.
+						</p>
+					</div>
+					
+                </div>
+            </section>
+
+            <!-- WEITERE SCREENSHOTS / WORKFLOWS -->
+            <section id="workflow" style="margin-top: 5rem;">
+                <h2 class="section-label">Einblicke</h2>
+                <h3 class="section-heading">Workflow: Vom Browser ins Messsystem</h3>
+
+                <div style="display: grid; grid-template-columns: 1fr; gap: 2.5rem;">
+                    <!-- Workflow 1: Datenerfassung & Import/Export -->
+                    <div style="background: var(--card); border: 1px solid var(--border); border-radius: 1rem; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
+                        <div style="border-radius: 0.5rem; overflow: hidden; border: 1px solid #262626;">
+                            <img src="creator-table.png" alt="x2XML Creator Parametereingabe und Dateiaustausch" style="width: 100%; height: auto; display: block;" loading="lazy">
+                        </div>
+                        <div>
+                            <h4 style="color: #fff; font-size: 1.05rem; font-weight: 600;">Gezielter Import & Schnellexport</h4>
+                            <p style="color: var(--text-muted); font-size: 0.875rem; line-height: 1.6; margin-top: 0.25rem;">
+                                Über die Importfunktion lesen Sie definierte CSV-Tabellen oder bestehende ATFX-Vorlagen mit allen fahrzeug- und streckenbezogenen Parametern ein. Nach der Prüfung oder Bearbeitung exportieren Sie die finale Konfiguration per Mausklick.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- WICHTIGER HINWEIS: SPEICHERVERHALTEN & SICHERHEIT -->
+            <section id="security" style="margin-top: 5rem;">
+                <div style="background: rgba(251, 191, 36, 0.05); border: 1px solid rgba(251, 191, 36, 0.25); border-radius: 1rem; padding: 2rem; position: relative;">
+                    <div style="display: flex; align-items: flex-start; gap: 1rem;">
+                        <div style="width: 2.25rem; height: 2.25rem; border-radius: 0.5rem; background: rgba(251, 191, 36, 0.15); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--accent-amber); font-weight: bold; font-size: 1.1rem;">
+                            !
+                        </div>
+                        <div>
+                            <h4 style="color: #fff; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">Wichtiger Hinweis zum Speicherverhalten</h4>
+                            <p style="color: var(--text-muted); font-size: 0.875rem; line-height: 1.6; margin-bottom: 0.75rem;">
+                                Der x2XML-Creator speichert <strong>keine Daten auf dem Server</strong>. Ihre sensiblen Messkonfigurationen und Fahrzeugdaten verbleiben ausschließlich in Ihrer aktuellen Browser-Sitzung.
+                            </p>
+                            <p style="color: var(--text-muted); font-size: 0.875rem; line-height: 1.6;">
+                                Es ist daher unerlässlich, Ihre Arbeit regelmäßig zu sichern: Sobald Sie das Browserfenster schließen oder neu laden, werden alle Eingaben unwiderruflich verworfen. Exportieren Sie Ihren Arbeitsstand deshalb unmittelbar nach der Fertigstellung als <strong>ATFX-Datei</strong> (für das Messsystem) oder als <strong>CSV-Datei</strong> (zur Weitergabe oder späteren Wiederaufnahme).
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+			<!-- CONTACT / STAMMDATEN -->
+			<section id="contact" style="margin-top: 5rem;">
+				<div>
+					<h2 class="section-label">Kontakt</h2>
+					<h3 class="section-heading">Interesse am x2XML Creator?</h3>
+				</div>
+
+				<div style="background: var(--card); border: 1px solid var(--border); border-radius: 1rem; padding: 2rem; display: flex; flex-direction: column; gap: 1.5rem;">
+					<p style="color: var(--text-muted); font-size: 0.9375rem; line-height: 1.6; max-width: 42rem;">
+						Haben Sie Fragen zur Webanwendung, benötigen Sie Zugangsdaten, eine Bereitstellung für Ihr Unternehmen oder eine Anbindung kundenspezifischer Excel-Importe? Schreiben Sie mir gerne direkt eine Nachricht.
+					</p>
+
+					<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; padding-top: 1rem; border-top: 1px solid rgba(38, 38, 38, 0.8);">
+						<div style="display: flex; flex-direction: column; gap: 0.25rem;">
+							<span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #737373; font-weight: 500;">Ansprechpartner</span>
+							<span style="font-size: 0.875rem; font-weight: 600; color: #e5e5e5; cursor: default;">Bernhard Schilling</span>
+						</div>
+						<div style="display: flex; flex-direction: column; gap: 0.25rem;">
+							<span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #737373; font-weight: 500;">Standort</span>
+							<span style="font-size: 0.875rem; font-weight: 600; color: #e5e5e5; cursor: default;">Neuötting, Deutschland</span>
+						</div>
+						<div style="display: flex; flex-direction: column; gap: 0.25rem;">
+							<span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #737373; font-weight: 500;">Direkt-E-Mail</span>
+							<a href="mailto:support@x2xml.com" style="font-size: 0.875rem; font-weight: 600; color: var(--accent-amber); text-decoration: none;">support@x2xml.com</a>
+						</div>
+					</div>
+				</div>
+			</section>
+
+        </main>
+
+        <!-- FOOTER -->
+        <footer>
+            <p>© <span id="year"></span> Bernhard Schilling XML Solutions</p>
+        </footer>
+
+        <script>
+            // Dynamisches Copyright-Jahr setzen
+            document.getElementById('year').textContent = new Date().getFullYear();
+        </script>
+    </body>
+</html>

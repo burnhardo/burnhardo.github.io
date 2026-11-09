@@ -104,33 +104,34 @@
                 padding: 0 1rem;
             }
 
-            nav.floating-nav {
-                display: flex;
-                align-items: center;
-                gap: 0.5rem;
-                padding: 0.375rem 0.75rem;
-                border-radius: 9999px;
-                background: rgba(18, 18, 18, 0.85);
-                backdrop-filter: blur(12px);
-                border: 1px solid #262626;
-                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
-                font-size: 0.875rem;
-                font-weight: 500;
-            }
+			nav.floating-nav {
+				display: flex;
+				align-items: center;
+				gap: 0.875rem;
+				padding: 0.625rem 1.25rem;
+				border-radius: 9999px;
+				background: rgba(18, 18, 18, 0.85);
+				backdrop-filter: blur(12px);
+				border: 1px solid #262626;
+				box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.6);
+				font-size: 1.125rem;
+				font-weight: 500;
+			}
 
-            nav.floating-nav a {
-                color: #a3a3a3;
-                text-decoration: none;
-                padding: 0.375rem 0.875rem;
-                border-radius: 9999px;
-                font-size: 0.8125rem;
-                transition: all 0.2s ease;
-            }
+			nav.floating-nav a {
+				color: #a3a3a3;
+				text-decoration: none;
+				padding: 0.625rem 1.375rem;
+				border-radius: 9999px;
+				font-size: 1.0625rem;
+				font-weight: 500;
+				transition: all 0.2s ease;
+			}
 
-            nav.floating-nav a:hover {
-                color: #fff;
-                background: rgba(38, 38, 38, 0.8);
-            }
+			nav.floating-nav a:hover {
+				color: #fff;
+				background: rgba(38, 38, 38, 0.8);
+			}
 
             /* Main Layout */
             main {
@@ -396,6 +397,11 @@
                 color: #fff;
                 transition: color 0.2s ease;
             }
+			
+			a.project-title {
+				text-decoration: none;
+				display: inline-block;
+			}
 
             .project-card:hover .title-sky { color: var(--accent-sky); }
             .project-card:hover .title-amber { color: var(--accent-amber); }
@@ -424,6 +430,12 @@
                 color: var(--accent-purple);
                 border-color: rgba(192, 132, 252, 0.2);
             }
+			
+			.version-rose {
+				background: rgba(251, 113, 133, 0.1);
+				color: var(--accent-rose);
+				border-color: rgba(251, 113, 133, 0.25);
+			}
 
             .project-desc {
                 margin-top: 0.75rem;
@@ -630,6 +642,7 @@
                 <a href="#home">Start</a>
                 <a href="#products">Produkte</a>
                 <a href="#contact">Kontakt</a>
+				<a href="#impressum">Impressum</a>
             </nav>
         </header>
 
@@ -798,7 +811,7 @@
                         <div class="project-info">
                             <div>
                                 <div class="project-header">
-                                    <h4 class="project-title title-sky">x2XML Reporter</h4>
+									<h4><a href="reporter.html" class="project-title title-sky">x2XML Reporter</a></h4>
                                     <span class="version-tag">2.0.0.12</span>
                                 </div>
                                 <p class="project-desc">
@@ -809,8 +822,8 @@
                             </div>
                             <div class="project-footer">
                                 <span class="tech-stack-font">Python • PySide6</span>
-                                <a href="#" class="screenshot-link" title="Screenshot">
-                                    <span>Screenshot</span>
+                                <a href="reporter.html" class="screenshot-link" title="Details anzeigen">
+                                    <span>Details</span>
                                     <svg style="width: 1rem; height: 1rem;" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                                 </a>
                             </div>
@@ -831,7 +844,7 @@
                         <div class="project-info">
                             <div>
                                 <div class="project-header">
-                                    <h4 class="project-title title-amber">x2XML Creator</h4>
+									<h4><a href="creator.html" class="project-title title-amber">x2XML Creator</a></h4>
                                     <span class="version-tag version-amber">2.0.0.10</span>
                                 </div>
                                 <p class="project-desc">
@@ -842,8 +855,8 @@
                             </div>
                             <div class="project-footer">
                                 <span class="tech-stack-font">PHP • HTML • JavaScript • CSS • SQL</span>
-                                <a href="#" class="screenshot-link" title="Screenshot">
-                                    <span>Screenshot</span>
+                                <a href="creator.html" class="screenshot-link" title="Details anzeigen">
+                                    <span>Details</span>
                                     <svg style="width: 1rem; height: 1rem;" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                                 </a>
                             </div>
@@ -853,24 +866,18 @@
                     <!-- PROJECT 3: Indexer -->
                     <div class="project-card">
                         <div class="project-preview">
-							<div class="preview-mockup">
-								<div style="display: flex; align-items: center; gap: 0.5rem;">
-									<div style="width: 1.25rem; height: 1.25rem; border-radius: 9999px; background: rgba(192, 132, 252, 0.2); border: 1px solid rgba(192, 132, 252, 0.4);"></div>
-									<div style="height: 0.5rem; width: 5rem; background: #404040; border-radius: 4px;"></div>
-								</div>
-								<div style="display: flex; flex-direction: column; gap: 0.375rem;">
-									<div style="height: 0.375rem; width: 100%; background: #262626; border-radius: 4px;"></div>
-									<div style="height: 0.375rem; width: 80%; background: #262626; border-radius: 4px;"></div>
-								</div>
-								<div style="display: flex; justify-content: flex-end;">
-									<div style="height: 1rem; width: 3.5rem; background: rgba(192, 132, 252, 0.2); border-radius: 4px;"></div>
-								</div>
-							</div>
+							<img 
+									src="indexer.png" 
+									alt="Screenshot x2XML Indexer Benutzeroberfläche" 
+									loading="lazy"
+									width="600"
+									height="400"
+								>
                         </div>
                         <div class="project-info">
                             <div>
                                 <div class="project-header">
-                                    <h4 class="project-title title-purple">x2XML ZATFX Indexer</h4>
+									<h4><a href="indexer.html" class="project-title title-purple">x2XML ZATFX Indexer</a></h4>
                                     <span class="version-tag version-purple">0.1.0</span>
                                 </div>
                                 <p class="project-desc">
@@ -881,8 +888,8 @@
                             </div>
                             <div class="project-footer">
                                 <span class="tech-stack-font">Rust • eGui</span>
-                                <a href="#" class="screenshot-link" title="Screenshot">
-                                    <span>Screenshot</span>
+                                <a href="indexer.html" class="screenshot-link" title="Details anzeigen">
+                                    <span>Details</span>
                                     <svg style="width: 1rem; height: 1rem;" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                                 </a>
                             </div>
@@ -892,25 +899,19 @@
                     <!-- PROJECT 4: Stats -->
                     <div class="project-card">
                         <div class="project-preview">
-                            <div class="preview-mockup">
-                                <div style="display: flex; align-items: center; gap: 0.5rem;">
-                                    <div style="width: 1.25rem; height: 1.25rem; border-radius: 9999px; background: rgba(244, 63, 94, 0.2); border: 1px solid rgba(244, 63, 94, 0.4);"></div>
-                                    <div style="height: 0.5rem; width: 5rem; background: #404040; border-radius: 4px;"></div>
-                                </div>
-                                <div style="display: flex; flex-direction: column; gap: 0.375rem;">
-                                    <div style="height: 0.375rem; width: 100%; background: #262626; border-radius: 4px;"></div>
-                                    <div style="height: 0.375rem; width: 80%; background: #262626; border-radius: 4px;"></div>
-                                </div>
-                                <div style="display: flex; justify-content: flex-end;">
-                                    <div style="height: 1rem; width: 3.5rem; background: rgba(244, 63, 94, 0.2); border-radius: 4px;"></div>
-                                </div>
-                            </div>
+							<img 
+									src="passbystats.png" 
+									alt="Screenshot x2XML PassBy Stats Statistik" 
+									loading="lazy"
+									width="600"
+									height="400"
+								>
                         </div>
                         <div class="project-info">
                             <div>
                                 <div class="project-header">
-                                    <h4 class="project-title title-rose">x2XML PassBy Stats</h4>
-                                    <span class="version-tag">0.2.0</span>
+									<h4><a href="passbystats.html" class="project-title title-rose">x2XML PassBy Stats</a></h4>
+                                    <span class="version-tag version-rose">0.2.0</span>
                                 </div>
                                 <p class="project-desc">
                                     Erstellen Sie Statistiken Ihrer PassBy-Fahrten. Die Statistiken werden als HTML- oder CSV-Datei ausgegeben. Zeigt die höchste FahrtID, das Messdatum und die maximale Fahrten-Anzahl der PassBy-Messungen in Ihrer Datei.
@@ -920,8 +921,8 @@
                             </div>
                             <div class="project-footer">
                                 <span class="tech-stack-font">Python • Rust • Tkinter</span>
-                                <a href="#" class="screenshot-link" title="Screenshot">
-                                    <span>Screenshot</span>
+                                <a href="passbystats.html" class="screenshot-link" title="Details anzeigen">
+                                    <span>Details</span>
                                     <svg style="width: 1rem; height: 1rem;" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                                 </a>
                             </div>
@@ -930,101 +931,104 @@
                 </div>
             </section>
             
-            <!-- CONTACT SECTION -->
-            <section id="contact" class="contact-section">
-                <div>
-                    <h2 class="section-label">Lassen Sie uns reden</h2>
-                    <h3 class="section-heading">Kontaktieren Sie mich</h3>
-                </div>
-                <div class="contact-grid">
-                    <!-- Left info column -->
-                    <div class="contact-info">
-                        <p style="color: #a3a3a3; font-size: 0.875rem; line-height: 1.6;">
-                            Haben Sie eine Frage zu einem Produkt? Zögern Sie nicht, sich zu melden. Ich bin immer offen für Diskussionen über freiberufliche Tätigkeiten, Technologie-Stacks oder Projektanfragen.
-                        </p>
-                        <div class="info-item" style="margin-top: 0.5rem;">
-                            <span class="info-label">Standort</span>
-                            <span class="info-val" style="cursor: default;">Neuötting, Germany</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Direkt-E-Mail</span>
-                            <a href="mailto:support@x2xml.com" class="info-val">support@x2xml.com</a>
-                        </div>
-                    </div>
-                    <!-- Right Form Column -->
-                    <div>
-                        <form id="contactForm" class="contact-form" onsubmit="handleFormSubmit(event)">
-                            <div class="form-group">
-                                <label for="name">Ihr Name</label>
-                                <input type="text" id="name" required placeholder="Name">
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="email">Ihre E-Mail</label>
-                                    <input type="email" id="email" required placeholder="name@domain.de">
-                                </div>
-                                <div class="form-group">
-                                    <label for="subject">Betreff</label>
-                                    <input type="text" id="subject" required value="Neue Produktanfrage">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="message">Nachricht</label>
-                                <textarea id="message" rows="4" required placeholder="Ihre Nachricht..."></textarea>
-                            </div>
-                            <button type="submit" id="submitBtn" class="btn-submit">
-                                <span>Nachricht senden</span>
-                                <svg style="width: 1rem; height: 1rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
-                            </button>
-                            <!-- Success notification box -->
-                            <div id="formSuccess" class="form-success">
-                                ✅ Vielen Dank! Ihre Nachricht wurde erfolgreich gesendet.
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </section>
+			<!-- CONTACT SECTION -->
+			<section id="contact" class="contact-section">
+				<div>
+					<h2 class="section-label">Kontakt</h2>
+					<h3 class="section-heading">Direkter Austausch</h3>
+				</div>
+
+				<!-- Stammdaten-Karte -->
+				<div style="background: var(--card); border: 1px solid var(--border); border-radius: 1rem; padding: 2rem; display: flex; flex-direction: column; gap: 1.5rem;">
+					<p style="color: var(--text-muted); font-size: 0.9375rem; line-height: 1.6; max-width: 42rem;">
+						Haben Sie Fragen zu den x2XML-Softwarewerkzeugen, benötigen Sie Unterstützung bei der Integration oder interessieren sich für maßgeschneiderte Anpassungen? Schreiben Sie mir gerne direkt eine E-Mail.
+					</p>
+
+					<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; pt: 1rem; border-top: 1px solid rgba(38, 38, 38, 0.8);">
+						<div class="info-item">
+							<span class="info-label">Name / Inhaber</span>
+							<span class="info-val" style="cursor: default;">Bernhard Schilling</span>
+						</div>
+						<div class="info-item">
+							<span class="info-label">Standort</span>
+							<span class="info-val" style="cursor: default;">Neuötting, Deutschland</span>
+						</div>
+						<div class="info-item">
+							<span class="info-label">E-Mail-Support & Vertrieb</span>
+							<a href="mailto:support@x2xml.com" class="info-val">support@x2xml.com</a>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<!-- IMPRESSUM SECTION -->
+			<section id="impressum" style="padding-top: 5rem;">
+				<div>
+					<h2 class="section-label">Rechtliche Angaben</h2>
+					<h3 class="section-heading">Impressum</h3>
+				</div>
+
+				<div style="background: var(--card); border: 1px solid var(--border); border-radius: 1rem; padding: 2rem; display: flex; flex-direction: column; gap: 2rem; font-size: 0.875rem; color: var(--text-muted); line-height: 1.7;">
+					
+					<!-- Angaben gemäß § 5 TMG / § 18 Abs. 2 MStV -->
+					<div>
+						<h4 style="color: #fff; font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem;">Angaben gemäß § 5 TMG</h4>
+						<p style="color: var(--text-main); font-weight: 500;">
+							Bernhard Schilling<br>
+							XML Solutions<br>
+							<!-- Ergänze hier deine vollständige ladungsfähige Anschrift -->
+							Fischervorstadt 3<br>
+							84524 Neuötting<br>
+							Deutschland
+						</p>
+					</div>
+
+					<div>
+						<h4 style="color: #fff; font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem;">Kontakt</h4>
+						<p>
+							E-Mail: <a href="mailto:support@x2xml.com" style="color: #fff; text-decoration: underline;">support@x2xml.com</a><br>
+							Telefon: +4916095763113
+						</p>
+					</div>
+
+					<div>
+						<h4 style="color: #fff; font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem;">Umsatzsteuer-Identifikationsnummer</h4>
+						<p>
+							Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br>
+							<span style="color: var(--text-main); font-family: monospace;">DE 354970790</span>
+						</p>
+					</div>
+
+					<div>
+						<h4 style="color: #fff; font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem;">Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h4>
+						<p style="color: var(--text-main);">
+							Bernhard Schilling<br>
+							Fischervorstadt 3<br>
+							84524 Neuötting
+						</p>
+					</div>
+
+					<div>
+						<h4 style="color: #fff; font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem;">Haftung für Inhalte und Links</h4>
+						<p>
+							Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.
+						</p>
+					</div>
+
+				</div>
+			</section>
+
         </main>
 
         <!-- FOOTER -->
         <footer>
             <p>© <span id="year"></span> Bernhard Schilling XML Solutions</p>
         </footer>
+		
+		<script>
+			// Dynamisches Copyright-Jahr setzen
+			document.getElementById('year').textContent = new Date().getFullYear();
+		</script>
 
-        <!-- Script logic -->
-        <script>
-            // Set dynamic copyright year
-            document.getElementById('year').textContent = new Date().getFullYear();
-
-            // Contact form submit handling without page reload
-            function handleFormSubmit(event) {
-                event.preventDefault();
-                const submitBtn = document.getElementById('submitBtn');
-                const formSuccess = document.getElementById('formSuccess');
-
-                // Feedback animation
-                submitBtn.disabled = true;
-                submitBtn.innerHTML = `
-                    <svg class="animate-spin" style="margin-left: -0.25rem; margin-right: 0.5rem; width: 1rem; height: 1rem; color: #000;" fill="none" viewBox="0 0 24 24">
-                        <circle style="opacity: 0.25;" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                        <path style="opacity: 0.75;" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                    </svg>
-                    Senden...
-                `;
-
-                setTimeout(() => {
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = `
-                        <span>Nachricht senden</span>
-                        <svg style="width: 1rem; height: 1rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
-                    `;
-                    formSuccess.style.display = 'block';
-                    document.getElementById('contactForm').reset();
-                    setTimeout(() => {
-                        formSuccess.style.display = 'none';
-                    }, 5000);
-                }, 900);
-            }
-        </script>
     </body>
 </html>
