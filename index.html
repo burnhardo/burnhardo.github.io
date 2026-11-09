@@ -332,6 +332,16 @@
                 transition: transform 0.3s ease;
             }
 
+			/* Bild füllt den Container sauber aus, ohne verzerrt zu werden */
+			.project-preview img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover; /* oder 'contain', falls das gesamte Fenster ohne Beschnitt sichtbar sein soll */
+				object-position: center top;
+				display: block;
+				transition: transform 0.3s ease;
+			}
+
             .project-card:hover .project-preview {
                 transform: scale(1.01);
             }
@@ -777,18 +787,13 @@
                     <!-- PROJECT 1: Reporter -->
                     <div class="project-card">
                         <div class="project-preview">
-                            <div class="preview-mockup">
-                                <div class="window-dots">
-                                    <span class="dot-red"></span>
-                                    <span class="dot-yellow"></span>
-                                    <span class="dot-green"></span>
-                                </div>
-                                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                                    <div style="height: 0.5rem; width: 66%; background: #404040; border-radius: 4px;"></div>
-                                    <div style="height: 0.5rem; width: 50%; background: #262626; border-radius: 4px;"></div>
-                                </div>
-                                <div style="height: 1.25rem; width: 100%; background: rgba(38, 38, 38, 0.6); border-radius: 4px;"></div>
-                            </div>
+							<img 
+									src="reporter.png" 
+									alt="Screenshot x2XML Reporter Benutzeroberfläche" 
+									loading="lazy"
+									width="600"
+									height="400"
+								>
                         </div>
                         <div class="project-info">
                             <div>
@@ -815,18 +820,13 @@
                     <!-- PROJECT 2: Creator -->
                     <div class="project-card">
                         <div class="project-preview">
-                            <div class="preview-mockup">
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
-                                    <div style="height: 0.75rem; width: 4rem; background: #404040; border-radius: 4px;"></div>
-                                    <div style="height: 0.75rem; width: 1.5rem; background: rgba(245, 158, 11, 0.5); border-radius: 9999px;"></div>
-                                </div>
-                                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem;">
-                                    <div style="height: 2.5rem; background: #262626; border-radius: 4px;"></div>
-                                    <div style="height: 2.5rem; background: #262626; border-radius: 4px;"></div>
-                                    <div style="height: 2.5rem; background: #262626; border-radius: 4px;"></div>
-                                </div>
-                                <div style="height: 0.5rem; width: 75%; background: #262626; border-radius: 4px;"></div>
-                            </div>
+							<img 
+									src="creator.png" 
+									alt="Screenshot x2XML Creator Benutzeroberfläche" 
+									loading="lazy"
+									width="600"
+									height="400"
+								>
                         </div>
                         <div class="project-info">
                             <div>
